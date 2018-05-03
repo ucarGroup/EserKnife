@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="es.jvm.log">
+
+    <insert id="batchInsert" parameterClass="nodeJVMStatInfo">
+      insert into es_jvm_log (
+           cluster_id
+          ,create_time
+          ,host
+          ,threads_count
+          ,threads_peak_count
+          ,heap_used_in_bytes
+          ,heap_used_percent
+          ,heap_committed_in_bytes
+          ,heap_max_in_bytes
+          ,non_heap_used_in_bytes
+          ,non_heap_committed_in_bytes
+          ,old_mem_used
+          ,old_mem_max
+          ,young_mem_max
+          ,young_mem_used
+          ,old_collection_count
+          ,old_collection_time
+          ,young_collection_count
+          ,young_collection_time
+          ,interval_old_collection_count
+          ,interval_old_collection_time
+          ,interval_young_collection_count
+          ,interval_young_collection_time
+          ,buffer_pools_direct_total_capacity
+          ,buffer_pools_direct_count
+          ,buffer_pools_direct_used
+          ,buffer_pools_mapped_total_capacity
+          ,buffer_pools_mapped_count
+          ,buffer_pools_mapped_userd
+        ) VALUES (
+           #clusterId#
+          ,#createTime#
+          ,#host#
+          ,#threadsCount#
+          ,#threadsPeakCount#
+          ,#heapUsedInBytes#
+          ,#heapUsedPercent#
+          ,#heapCommittedInBytes#
+          ,#heapMaxInBytes#
+          ,#nonHeapUsedInBytes#
+          ,#nonHeapCommittedInBytes#
+          ,#oldMemUsed#
+          ,#oldMemMax#
+          ,#youngMemMax#
+          ,#youngMemUsed#
+          ,#oldCollectionCount#
+          ,#oldCollectionTime#
+          ,#youngCollectionCount#
+          ,#yongCollectionTime#
+          ,#intervalOldCollectionCount#
+          ,#intervalOldCollectionTime#
+          ,#intervalYoungCollectionCount#
+          ,#intervalYoungCollectionTime#
+          ,#bufferPoolsDirectTotalCapacity#
+          ,#bufferPoolsDirectCount#
+          ,#bufferPoolsDirectUsed#
+          ,#bufferPoolsMappedTotalCapacity#
+          ,#bufferPoolsMappedCount#
+          ,#bufferPoolsMappedUserd#
+        )
+    </insert>
+
+    <select id="getLastByParams" parameterClass="nodeJVMStatInfo" resultClass="nodeJVMStatInfo">
+        <![CDATA[
+            select host,old_mem_used as oldMemUsed,
+            old_mem_max as oldMemMax,young_mem_max as youngMemMax,young_mem_used as youngMemUsed,
+            old_collection_count as oldCollectionCount,old_collection_time as oldCollectionTime,
+             young_collection_count as youngCollectionCount,young_collection_time as yongCollectionTime
+             from es_jvm_log
+            where host = #host# and cluster_id = #clusterId# and create_time > #createTime#
+            order by create_time desc limit 1
+        ]]>
+    </select>
+
+</sqlMap>

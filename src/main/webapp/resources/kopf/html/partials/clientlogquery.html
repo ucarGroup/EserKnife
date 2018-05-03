@@ -1,0 +1,135 @@
+<style>
+
+    .logrow{
+        border-bottom: 1px solid #464d4e;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        margin: 0px;
+        min-height: 30px;
+        font-size: 12px;
+    }
+
+    .discover-info {
+        background-color:#352c2c;
+        float: right;
+        padding: 5px 10px;
+        border-bottom-left-radius: 4px;
+        text-align: right;
+        margin-left: 50px;
+    }
+
+    dl{
+        margin: 0px;
+        display: inline-block;
+    }
+
+    dt{
+        background: #352c2c;
+        color: #999999;
+        padding: 1px 5px;
+        margin-right: 5px;
+        font-family: monospace;
+        word-break: normal;
+        display: inline-block;
+        font-size: 13px;
+    }
+
+    dd{
+        display: inline;
+        padding-right: 5px;
+        font-family: "Lucida Console", Monaco, monospace;
+        font-size: 13px;
+        color: #999999;
+    }
+
+    .enter {
+        word-break: break-all; word-wrap:break-word;
+    }
+
+
+    .jqx-widget-content-metrodark{
+        color: #fff;
+    }
+</style>
+<div class="container-fluid" style="height: 1800px;" >
+    <div class="row" style="height: 85%;">
+        <div class="col-md-12">
+            <div id="operationDiv" style="padding-top: 20px">
+                <div >
+                    <table style="border: 0px">
+                        <tr>
+                            <td>
+                                <div >
+                                    <input type="text" class="form-control" id='startTime4ClientlogQuery' />
+                                </div>
+                            </td>
+                            <td>
+                                <div style="padding-left: 6px">
+                                    <strong>至</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="padding-left: 6px;">
+                                    <input type="text" class="form-control" id='endTime4ClientlogQuery' />
+                                </div>
+                            </td>
+                            <td>
+                                <select class="form-control input-sm" ng-model="costTime" style="margin-left: 20px;">
+                                    <option value="">总耗时</option>
+                                    <option value="1">1到3s</option>
+                                    <option value="3">3s以上</option>
+                                </select>
+                            </td>
+                            <td>
+                                <div id="index-combobox-clientlog" style="margin-left: 40px" >
+                            </td>
+                            <td>
+                                <div style="padding-left: 30px" method="search">
+                                    <button type="button" class="btn btn-primary" ng-click="queryLog()">
+                                        <span style="word-spacing: 5px;">查&nbsp;询</span>
+                                    </button>
+                                    <span style="margin-left: 5px;color: #999999;font-size: 12px;font-family: "Lucida Console", Monaco, monospace;">回车可提交</span>
+
+                                </div>
+                            </td>
+
+                            <td>
+                                <div class="discover-info" ng-show="showCount" style="margin-left: 10px">
+                                    <span style="display: inline-block;font-size: 13px">{{hits}}</span>
+                                    <div style="display: inline-block;font-size: 13px;"><span><ng-pluralize count="hits" when="{'0':'hit','1':'hit', 'other':'hits'}"></ng-pluralize></span></div>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div>
+                <div style="margin-top: 20px;" >
+
+                    <!--<div class="logrow" ng-repeat="eachlog in logs">
+                        <dl>
+                            <dt>collectTime</dt><dd>{{eachlog.collectTime}}</dd>
+                            <dt>slowLogLevel</dt><dd>{{eachlog.slowLogLevel}}</dd>
+                            <dt>serverIp</dt><dd>{{eachlog.serverIp}}</dd>
+                            <dt>slowLogType</dt><dd>{{eachlog.slowLogType}}</dd>
+                            <dt>slowLogIndex</dt><dd>{{eachlog.slowLogIndex}}</dd>
+                            <dt>slowLogUseTime</dt><dd>{{eachlog.slowLogUseTime}}</dd>
+                            <dt>slowLogSearchType</dt><dd>{{eachlog.slowLogSearchType}}</dd>
+                            <dt>slowLogSource</dt><dd>{{eachlog.slowLogSource}}</dd>
+                            <dt>slowLogExtendSource</dt><dd>{{eachlog.slowLogExtendSource}}</dd>
+                        </dl>
+                    </div>-->
+                    <div id="slowlog-grid-clientlog"></div>
+                    <div id="jqxLoader-clientlog">
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>

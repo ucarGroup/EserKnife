@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.token.TokenInfoDao">
+
+    <typeAlias alias="tokenInfo" type="com.ucar.eser.core.bean.vo.token.TokenInfo"></typeAlias>
+
+    <sql id="token_info">
+	      t.id AS id,
+	      t.name AS name,
+		  t.update_time AS updateTime,
+		  t.content AS content
+    </sql>
+
+    <select id="getList" resultClass="tokenInfo">
+        SELECT <include refid="token_info"/>
+        FROM es_custom_token_lib t
+    </select>
+
+    <select id="getTokenInfoById" parameterClass="long" resultClass="tokenInfo">
+        SELECT <include refid="token_info"/>
+        FROM es_custom_token_lib t
+        WHERE t.id = #id#
+    </select>
+
+    <select id="getTokenInfoByName" parameterClass="string" resultClass="tokenInfo">
+        SELECT <include refid="token_info"/>
+        FROM es_custom_token_lib t
+        WHERE t.name = #name#
+    </select>
+    
+    <insert id="addTokenInfo" parameterClass="tokenInfo">
+        INSERT INTO es_custom_token_lib
+            (name,content)
+		VALUES (#name#,#content#);
+    </insert>
+    
+    <update id="updateTokenInfo" parameterClass="tokenInfo">
+    	UPDATE es_custom_token_lib
+		SET   content = #content#,
+		      name = #name#,
+			  update_time = now()
+		WHERE id = #id#;
+    </update>
+    
+    <delete id="deleteTokenInfoById" parameterClass="long">
+       DELETE FROM es_custom_token_lib WHERE id = #id#
+    </delete>
+    
+    <select id="checkExist" parameterClass="tokenInfo" resultClass="int"> 
+        SELECT count(1)
+        FROM es_custom_token_lib t WHERE t.name = #name#
+    </select>
+
+</sqlMap>

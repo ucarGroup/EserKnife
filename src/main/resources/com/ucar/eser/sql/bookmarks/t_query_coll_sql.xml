@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="escloud.querycollection">
+
+	<typeAlias alias="queryCollectionInfo" type="com.ucar.eser.core.bean.po.QueryCollectionInfo"></typeAlias>
+	<typeAlias alias="queryCollectionSubInfo" type="com.ucar.eser.core.bean.po.QueryCollectionSubInfo"></typeAlias>
+
+	<resultMap id="result-map" class="queryCollectionInfo">  
+		<result property="id" column="id" />  
+        <result property="name" column="name" />  
+        <result property="clusterName" column="clusterName" /> 
+        <result property="userName" column="userName" />  
+        <result property="index" column="index" />   
+        <result property="count" column="count"/> 
+        <result property="queryCollectionSubInfos" column="id" select="escloud.querycollection.getSubsById"/>  
+    </resultMap> 
+	<select id="getQueryCollectionInfos" parameterClass="queryCollectionInfo" resultClass="queryCollectionInfo">
+		select id, name,
+		 cluster_name as clusterName, 
+		`index`, 
+		count, 
+		user_name as userName,
+		state,
+		create_time as createTime 
+		from es_query_collection where state=1 and cluster_name=#clusterName# and user_name=#userName# order by create_time desc
+	</select>
+
+    <insert id="addQueryCollectionInfo" parameterClass="queryCollectionInfo">
+       insert into es_query_collection (
+		   name
+		  ,cluster_name
+		  ,`index`
+		  ,count
+		  ,user_name
+		  ,create_time
+		) VALUES (
+		  #name#
+		  ,#clusterName#
+		  ,#index#
+		  ,#count#
+		  ,#userName#
+		  ,now()
+		)
+		<selectKey resultClass="long" keyProperty="id"> 
+			SELECT last_insert_id()  AS ID		
+	    </selectKey>
+    </insert>
+    
+    <insert id="addQueryCollectionSubInfo" parameterClass="queryCollectionSubInfo">
+    	insert into es_query_collection_subs (
+		   qc_id
+		  ,logic_condition
+		  ,logic_val
+		  ,`condition`
+		  ,con_val
+		  ,con_gt
+		  ,con_lt
+		  ,con_gt_time
+		  ,con_lt_time
+		  ,level
+		) VALUES (
+		  #qcId#
+		  ,#logicCondition#
+		  ,#logicVal#
+		  ,#condition#
+		  ,#conVal#
+		  ,#conGt#
+		  ,#conLt#
+		  ,#conGtTime#
+		  ,#conLtTime#
+		  ,#level#
+		)
+    </insert>
+    
+    
+    <select id="getDetailBySome" parameterClass="queryCollectionInfo" resultMap="escloud.querycollection.result-map">
+    	select id, name,
+		 cluster_name as clusterName, 
+		`index`, 
+		count,
+		 user_name as userName 
+		from es_query_collection where state=1  
+		<isNotEmpty prepend="and" property="name">
+			name=#name#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="clusterName">
+			cluster_name=#clusterName# 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="userName">
+			user_name = #userName# 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id">
+			id = #id# 
+		</isNotEmpty>
+		 order by create_time desc
+    </select>
+    
+    <select id="getSubsById" parameterClass="long" resultClass="queryCollectionSubInfo">
+    	select id, qc_id as quId, logic_condition as logicCondition, 
+    	logic_val as logicVal, 
+    	`condition`, con_val as conVal, 
+    	con_gt as conGt, con_lt as conLt, 
+    	con_gt_time as conGtTime, con_lt_time as conLtTime, level  from es_query_collection_subs where qc_id=#id# order by level 
+    </select>
+    <update id="updateCollectionInfo" parameterClass="queryCollectionInfo">
+    	update es_query_collection set state = #state# where id = #id#
+    </update>
+</sqlMap>

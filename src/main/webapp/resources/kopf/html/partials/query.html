@@ -1,0 +1,222 @@
+<style>
+
+    .logrow{
+        border-bottom: 1px solid #464d4e;
+        padding-top: 10px;
+        padding-bottom: 5px;
+        margin: 0 30px;
+        min-height: 30px;
+        font-size: 12px;
+    }
+
+    .discover-info {
+        background-color: #ecf0f1;
+        float: right;
+        padding: 5px 10px;
+        border-bottom-left-radius: 4px;
+        text-align: right;
+        margin-left: 50px;
+    }
+
+    dl{
+        margin: 0px;
+        display: inline-block;
+    }
+
+    dt{
+        background: #352c2c;
+        color: #999999;
+        padding: 1px 5px;
+        margin-right: 5px;
+        font-family: monospace;
+        word-break: normal;
+        display: inline-block;
+        font-size: 13px;
+    }
+
+    dd{
+        display: inline;
+        padding-right: 5px;
+        font-family: "Lucida Console", Monaco, monospace;
+        font-size: 13px;
+        color: #999999;
+    }
+	.wjl_div{
+		  position: fixed;
+		  margin-left: -201px;
+		  background-color: #363636;
+		  min-height: 130px;
+		  border-radius: inherit;
+		  top:70px;
+	}
+	.wjl_div_div{
+	  margin: 20px 10px;
+	 }
+	.wjl_div_sclb{
+	 	  position: fixed;
+		  margin-left: -204px;
+		  background-color: #363636;
+		  min-height: 203px;
+		  border-radius: inherit;
+		  top:70px;
+	 }
+</style>
+ <div id="rel_div" class="col-lg-0"  style="position:fixed; right:10px; float:right;z-index: 10; top: 40px;">
+     <ul>
+         <li id="sclb" class="btn input-sm navbar-cluster-status-green" style="border-color: #468847">
+             <i class="fa  fa-list" title="收藏列表"></i>
+             <div class="wjl_div_sclb wjlstop" id="mySclb" style="display:none">
+                 <div class="wjl_div_div">
+                     标题：<input type="text" name="name" value=""  id="filterName"/>
+                 </div>
+                 <div class="col-xs-12" style="padding: 0px;">
+                     <div id="dbcol-grid_from_type_query"></div>
+                 </div>
+             </div>
+         </li>
+     	<li id="sc"  class="btn btn-primary input-sm navbar-cluster-status-green" style="border-color: #363636">
+     		<i class="fa fa-star-o" id="scimg" title='我要收藏' ></i>
+     		<div class="wjl_div wjlstop" id="myPopover" style="display:none">
+     			<div class="wjl_div_div">
+     				标题：<input type="text" name="name" value="" id="name"/>
+     			</div>
+     			<div>
+	      			<button type="button" class="btn input-sm navbar-cluster-status-green" style="border-color: #363636" ng-click="doCollections()">
+	      				<i class="fa fa-star-o">收藏</i>
+	      			</button>
+     			</div>
+     		</div>
+     	</li>
+
+     </ul>
+</div>
+<div class="col-lg-0"  style="position:fixed; right:10px; float:right;z-index: 10; bottom: 30px;">
+    <!--<div>
+        <span style="margin-left: 20px" ng-show="isAdmin == 'true'" ng-click="export()">按此条件删除</span>
+    </div>-->
+    <a id="submit4Deldoc" data-toggle="modal" href="#confirm_dialog2"
+       class="btn btn-primary input-sm hide"
+       target="_self">提交</a>
+    <button type="submit" class="btn btn-primary input-sm" ng-show="isAdmin == 'true' || isProd != 3" ng-click="export()">
+        按此条件删除
+    </button>
+</div>
+<div class="row" style="margin-top: 20px;margin-bottom: 10px">
+    <div class="col-md-12">
+        <div class="col-lg-5">
+            <!--<select class="form-control input-sm" ng-model="curIndex" id="indexName"-->
+                    <!--ng-options="i.name as i.name for i in indices | orderBy:'name'">-->
+                <!--<option value="">选择索引</option>-->
+            <!--</select>-->
+            <div id="index-combobox"></div>
+        </div>
+
+        <div class="col-lg-1">
+            <select class="form-control input-sm" ng-model="resultMaxNum">
+                <option value="20">20</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+        </div>
+
+        <div class="col-lg-2">
+            <button type="submit" class="btn btn-primary input-sm" ng-click="sendRequest()">
+                <i class="fa fa-history"></i>
+            </button>
+            <span style="margin-left: 5px;color: #999999;font-size: 12px;font-family: "Lucida Console", Monaco, monospace;">回车可提交</span>
+        </div>
+
+
+
+        <!-- <div class="col-lg-2 show">
+            <select class="form-control input-sm" ng-model="curIndex" id="indexName"
+                    ng-options="i.name as i.name for i in indices | orderBy:'name'">
+                <option value="">选择索引</option>
+            </select>
+        </div> -->
+    </div>
+</div>
+<div  class="row" style="margin-bottom: 10px" ng-repeat="cond in conditions" ng-show="cond.view" hello>
+
+    <div class="col-md-12" >
+        <div class="col-lg-1">
+            <select class="form-control input-sm" id="logicOps{{$index}}" ng-model="logicOps" ng-change="changeLogicOps(cond,this)">
+                <option id="must{{$index}}" value="must" >与</option>
+                <option id="should{{$index}}" value="should" >或</option>
+                <option id="mustnot{{$index}}" value="must not" >非</option>
+            </select>
+        </div>
+
+        <div class="col-lg-4">
+            <!--<select class="form-control input-sm" id="field{{$index}}">
+                <option value="">选择字段</option>
+                <option ng-repeat="eachField in fls" value="{{eachField}}">{{eachField}}</option>
+            </select>-->
+            <div id="field{{$index}}"></div>
+        </div>
+
+        <div class="col-lg-1">
+            <select class="form-control input-sm" id="ops{{$index}}" ng-model="opsType" ng-change="change(cond,this)">
+                <option value="match" selected>match</option>
+                <option value="range">range</option>
+                <option value="missing">missing</option>
+            </select>
+        </div>
+
+        <div class="col-lg-5 hide" id="range{{$index}}">
+            <div class="row">
+                <div class="col-lg-2" style="padding-right: 10px">
+                    <select class="form-control input-sm" id="gtops{{$index}}" >
+                        <option value="gt" >></option>
+                        <option value="gte">>=</option>
+                    </select>
+                </div>
+                <div class="col-lg-4" style="padding-left: 0px;padding-right: 10px">
+                    <input type="text" class="form-control input-sm" placeholder="YYYY-mm-dd hh:MM:ss" id="qtext4Gt{{$index}}" >
+                </div>
+                <div class="col-lg-2" style="margin-left: -15px;padding-right: 10px">
+                    <select class="form-control input-sm" id="ltops{{$index}}">
+                        <option value="lt"><</option>
+                        <option value="lte"><=</option>
+                    </select>
+                </div>
+                <div class="col-lg-4" style="padding-left: 0px">
+                    <input type="text" class="form-control input-sm" placeholder="YYYY-mm-dd hh:MM:ss" id="qtext4Lt{{$index}}" >
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 show" id="match{{$index}}">
+            <input type="text" class="form-control input-sm" placeholder="输入要查询的文本" id="qtext{{$index}}" >
+        </div>
+
+        <div class="col-lg-1">
+            <button type="button" class="btn btn-info" style="padding: 5px 5px;line-height: 13px" id="rowShow{{$index}}" ng-click="showNextCond(cond)">
+                <span class="glyphicon glyphicon-plus"></span>
+            </button>
+            <button type="button" class="btn btn-info" style="margin-left: 10px;padding: 5px 5px;line-height: 13px" id="rowHide{{$index}}" ng-click="hideCurCond(cond)" >
+                <span class="glyphicon glyphicon-minus"></span>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+
+<div class="row" style="margin-top: 20px;" ng-show="hasResult" >
+    <div class= "logrow" style="font-family: Lucida Console, Monaco, monospace;font-size: 13px;font-weight: 400;border: 0px;color: #959595">
+        命中&nbsp;{{docNum}}&nbsp;个文档,耗时&nbsp;{{costTime}}ms&nbsp;
+    </div>
+
+    <div class= "logrow" ng-repeat="eachRow in results">
+        <span style="display: inline-block;margin-right: 5px">{{$index+1}}.</span>
+        <dl ng-repeat="(key, value) in eachRow">
+            <dt>{{key}}</dt><dd ng-bind-html="value | to_trusted"></dd>
+        </dl>
+    </div>
+</div>
+
+<div id="jqxLoader"></div>
+
+
+

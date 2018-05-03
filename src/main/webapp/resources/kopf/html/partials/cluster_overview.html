@@ -1,0 +1,89 @@
+<div ng-include src="'/eserknife/resources/kopf/html/partials/cluster_stats.html'" style="padding-bottom: 20px;"></div>
+<div class="row">
+ <!-- <div class="col-lg-10" ng-include src="'/escloud/partials/cluster_overview/filters.html'"></div>-->
+  <div class="col-lg-10">
+
+
+    <div class="row">
+
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="col-lg-10 col-sm-6 cluster-overview-filter">
+            <input type="text" ng-model="index_paginator.filter.name"
+                   class="form-control input-sm"
+                   placeholder="按索引名称">
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <div class="row">
+          <div class="col-lg-10 col-sm-6  cluster-overview-filter">
+            <input type="text" ng-model="node_filter.name"
+                   class="form-control input-sm"
+                   placeholder="按节点名称">
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+  <div class="col-lg-2">
+    <ng-pagination page="page" paginator="index_paginator" label="'索引'"></ng-pagination>
+  </div>
+</div>
+<table class="table table-bordered table-condensed table-rounded overview">
+  <thead>
+    <tr>
+      <!-- cluster actions -->
+      <th class="box cluster-map-header-cluster-actions">
+        <div class="row">
+          <div class="col-lg-6 col-xs-6">
+            <a class="cluster-map-header-cluster-action" ng-click="expandedView = !expandedView">
+              <i class="fa fa-expand" title="expanded node view" ng-hide="expandedView"></i>
+              <i class="fa fa-compress" title="compact node view" ng-show="expandedView"></i>
+            </a>
+          </div>
+          <div class="col-lg-6 col-xs-6">
+            <a class="cluster-map-header-cluster-action">
+              <i class="fa fa-sort-alpha-asc" title="sort ascending" ng-show="index_filter.asc" ng-click="index_filter.asc = false"></i>
+              <i class="fa fa-sort-alpha-desc" title="sort descending" ng-hide="index_filter.asc" ng-click="index_filter.asc = true"></i>
+            </a>
+          </div>
+        </div>
+      </th>
+      <!-- indices -->
+      <th ng-repeat="index in page.elements track by $index" class="table-header box" ng-include="'/eserknife/resources/kopf/html/partials/cluster_overview/index_header.html'">
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-show="cluster.unassigned_shards > 0 || cluster.relocating_shards > 0 || cluster.initializing_shards > 0">
+      <td class="box unassigned-row">
+        <div ng-show="cluster.unassigned_shards > 0">
+          <i class="fa fa-fw fa-warning danger-action"> </i>
+          <span>{{cluster.unassigned_shards | number:0}} unassigned shards</span>
+        </div>
+        <div ng-show="cluster.relocating_shards > 0">
+          <i class="fa fa-fw fa-refresh fa-spin"> </i>
+          <span>{{cluster.relocating_shards | number:0}} relocating shards</span>
+        </div>
+        <div ng-show="cluster.initializing_shards > 0">
+          <i class="fa fa-fw fa-spinner fa-spin"> </i>
+          <span>{{cluster.initializing_shards | number:0}} initializing shards</span>
+        </div>
+        <div class="normal-action">
+          <span ng-show="index_filter.healthy" ng-click="index_filter.healthy = false"><small><i>show only unhealthy indices</i></small></span>
+          <span ng-hide="index_filter.healthy" ng-click="index_filter.healthy = true"><small><i>show all indices</i></small></span>
+        </div>
+      </td>
+      <td class="shards-cell shards box" ng-repeat="index in page.elements track by $index" ng-include="'/eserknife/resources/kopf/html/partials/cluster_overview/index_unassigned.html'">
+      </td>
+    </tr>
+    <tr ng-repeat="node in nodes | orderBy:'name':false track by $index">
+      <td class="box" ng-static-include file="../partials/cluster_overview/node_cell"></td>
+      <td ng-repeat="index in page.elements track by $index" ng-class="{'box': index.closed}" class="shards-cell" ng-include="'/eserknife/resources/kopf/html/partials/cluster_overview/index_body.html'">
+      </td>
+    </tr>
+  </tbody>
+</table>

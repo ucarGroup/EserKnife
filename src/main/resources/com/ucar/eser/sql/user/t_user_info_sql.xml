@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.user.userInfoDao">
+
+    <typeAlias alias="userInfo" type="com.ucar.eser.core.bean.po.UserInfo"></typeAlias>
+
+    <sql id="user_info">
+        t.id AS id,
+        t.product_line AS productLine,
+        t.user_name AS userName,
+        t.user_email AS userEmail,
+        t.user_pwd AS userPwd,
+        t.es_account AS esAccount,
+        t.es_pwd AS esPwdCiphertext,
+        t.role AS role,
+        t.state AS state,
+        t.operate_time AS operateTime
+    </sql>
+
+    <select id="getList" parameterClass="string" resultClass="userInfo">
+        SELECT <include refid="user_info"/>
+        FROM ES_USER_INFO t
+    </select>
+
+    <select id="getUserInfoById" parameterClass="long" resultClass="userInfo">
+        SELECT <include refid="user_info"/>
+        FROM ES_USER_INFO t
+        WHERE t.id = #id#
+    </select>
+    
+    <select id="getUserInfoByUserName" parameterClass="string" resultClass="userInfo">
+        SELECT <include refid="user_info"/>
+        FROM ES_USER_INFO t
+        WHERE t.user_name = #userName# LIMIT 1
+    </select>
+
+    <insert id="addUserInfo" parameterClass="userInfo">
+        INSERT INTO `es_user_info`
+            (`user_name`,
+             `user_email`,
+             `user_pwd`,
+             `product_line`,
+             `es_account`,
+             `es_pwd`,
+             `role`,
+             `state`,
+             `operate_time`)
+		VALUES (#userName#,
+		        #userEmail#,
+		        #userPwd#,
+		        #productLine#,
+		        #esAccount#,
+		        #esPwdCiphertext#,
+		        #role#,
+		        #state#,
+		        now());
+    </insert>
+    
+    <update id="updateUserInfo" parameterClass="userInfo">
+    	UPDATE `es_user_info`
+		SET `user_name` = #userName#,
+		    `product_line` = #productLine#,
+		    `role` = #role#,
+		    `state` = #state#,
+		    `operate_time` = now()
+		WHERE `id` = #id#;
+    </update>
+    
+    <delete id="deleteUserInfoById" parameterClass="long">
+       DELETE FROM `ES_USER_INFO` WHERE id = #id#
+    </delete>
+    
+    <select id="checkExist" parameterClass="userInfo" resultClass="int"> 
+        SELECT count(1)
+        FROM ES_USER_INFO t WHERE (t.user_name = #userName# or  t.user_email = #userEmail#)
+        <isNotEmpty prepend="AND" property="id" >
+			<![CDATA[	t.id != #id#  ]]>
+		</isNotEmpty>
+    </select>
+
+    <select id="getListByIds"  parameterClass="java.util.ArrayList" resultClass="userInfo">
+        select <include refid="user_info"/> from ES_USER_INFO t where t.id in
+        <iterate close=")" open="("  conjunction=",">
+            <![CDATA[
+                 #ids[]#
+            ]]>
+        </iterate>
+    </select>
+
+</sqlMap>

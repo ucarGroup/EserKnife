@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.stat.NodeJVMStatDao">
+
+    <typeAlias alias="nodeJVMStatInfo" type="com.ucar.eser.core.bean.vo.stat.NodeJVMStatInfo"></typeAlias>
+    <sql id="stat_info">
+        t.id AS id,
+        t.cluster_name AS clusterName,
+        t.host AS host,
+        t.old_mem_used AS oldMemUsed,
+		t.old_mem_max AS oldMemMax,
+		t.young_mem_max AS youngMemMax,
+		t.young_mem_used AS youngMemUsed,
+		t.old_collection_count AS oldCollectionCount,
+		t.interval_old_collection_count AS intervalOldCollectionCount,
+		t.old_collection_time AS oldCollectionTime,
+		t.interval_old_collection_time AS intervalOldCollectionTime,
+        t.collect_time AS collectTime,
+        t.execute_time AS executeTime
+    </sql>
+    
+    <!-- 根据时间，集群、结点ip， 线程池类型查询打点信息 -->
+    <select id="getList" parameterClass="nodeJVMStatInfo" resultClass="nodeJVMStatInfo">
+        SELECT <include refid="stat_info"/>
+        FROM es_node_jvm_stat t
+        WHERE  t.cluster_name = #clusterName# 
+          AND  t.host = #host#
+          AND  t.collect_time between #startTime# and #endTime#
+    </select>
+    
+    <insert id="insertStat" parameterClass="nodeJVMStatInfo">
+        INSERT INTO es_node_jvm_stat
+            (id,
+             cluster_name,
+             host,
+             old_mem_used,
+             old_mem_max,
+             young_mem_max,
+             young_mem_used,
+             old_collection_count,
+             interval_old_collection_count,
+             old_collection_time,
+             interval_old_collection_time,
+             collect_time,
+             execute_time)
+		VALUES (#id#,
+		        #clusterName#,
+		        #host#,
+		        #oldMemUsed#,
+		        #oldMemMax#,
+		        #youngMemMax#,
+		        #youngMemUsed#,
+		        #oldCollectionCount#,
+		        #intervalOldCollectionCount#,
+		        #oldCollectionTime#,
+		        #intervalOldCollectionTime#,
+		        #collectTime#,
+		        #executeTime#);
+    </insert>
+    
+    
+    <!-- 根据插入时间，集群、结点ip，查询打点信息 -->
+    <select id="getStatInfos" parameterClass="nodeJVMStatInfo" resultClass="nodeJVMStatInfo">
+        SELECT <include refid="stat_info"/>
+        FROM es_node_jvm_stat t
+        WHERE  t.cluster_name = #clusterName# 
+          AND  t.host = #host#
+          AND  t.collect_time = #collectTime#
+    </select>
+    
+</sqlMap>

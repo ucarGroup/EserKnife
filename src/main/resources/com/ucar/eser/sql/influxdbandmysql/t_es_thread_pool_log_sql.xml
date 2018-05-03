@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="es.thread.pool.log">
+
+
+
+    <insert id="batchInsert" parameterClass="nodeThreadPoolStatInfo">
+        insert into es_thread_pool_log (
+           cluster_id
+          ,create_time
+          ,host
+          ,thread_type
+          ,active
+          ,completed
+          ,interval_completed
+          ,intervalRejected
+          ,largest
+          ,queue
+          ,rejected
+          ,threads
+        ) VALUES (
+           #clusterId#
+          ,#createTime#
+          ,#host#
+          ,#threadType#
+          ,#active#
+          ,#completed#
+          ,#intervalCompleted#
+          ,#intervalRejected#
+          ,#largest#
+          ,#queue#
+          ,#rejected#
+          ,#threads#
+        )
+    </insert>
+
+    <select id="getNodeThreadPoolStatInfos" parameterClass="nodeThreadPoolStatInfo" resultClass="nodeThreadPoolStatInfo">
+        <![CDATA[
+            select  create_time as createTime
+              ,host as host
+              ,active as active
+              ,thread_type as threadType
+              ,completed as completed
+              ,interval_completed as intervalCompleted
+              ,intervalRejected as intervalRejected
+              ,largest as largest
+              ,queue as queue
+              ,rejected as rejected
+              ,threads as threads from es_thread_pool_log where host =#host# and
+                create_time >=#createTime#
+              order by create_time
+        ]]>
+    </select>
+</sqlMap>

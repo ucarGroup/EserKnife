@@ -1,0 +1,147 @@
+<script type="text/ng-template" id="customTemplate.html">
+    <a>
+        <span ng-bind-html="match.label | uibTypeaheadHighlight:query"></span>
+    </a>
+</script>
+
+<script type="text/ng-template" id="customPopupTemplate.html">
+    <div class="custom-popup-wrapper"
+         ng-style="{top: position().top+'px', left: position().left+'px'}"
+         style="display: block;"
+         ng-show="isOpen() && !moveInProgress"
+         aria-hidden="{{!isOpen()}}">
+        <ul class="dropdown-menu" role="listbox">
+            <li ng-repeat="match in matches track by $index" ng-class="{active: isActive($index) }"
+                ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+                <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+            </li>
+        </ul>
+    </div>
+</script>
+<style>
+	.wjl_div_client{
+		  position: fixed;
+		  margin-left: -201px;
+		  top: 85px;
+		  background-color: #363636;
+		  min-height: 130px;
+		  border-radius: inherit;
+		   z-index:10;
+	}
+	.wjl_div_div_client{
+	  margin: 20px 10px;
+	 }
+	.wjl_div_sclb_client{
+	 	  position: fixed;
+		  margin-left: -205px;
+		  top: 85px;
+		  background-color: #363636;
+		  min-height: 203px;
+		  border-radius: inherit;
+		  z-index:10;
+	 }
+</style>
+ <div id="rel_div"  class="col-lg-0"  style="position: fixed;z-index:100px; margin-top:14px; right:15px; float:right;z-index: 10; top: 40px;">
+     <ul >
+         <li id="sclb_client" class="btn input-sm navbar-cluster-status-green" style="border-color: #468847">
+             <i class="fa fa-list" title="收藏列表"></i>
+             <div class="wjl_div_sclb_client wjlstop" id="mySclb_client" style="display:none">
+                 <div class="wjl_div_div_client">
+                     标题：<input type="text" name="name" value=""  id="filterName"/>
+                 </div>
+                 <div class="col-xs-12" style="padding: 0px;">
+                     <div id="dbcol-grid_from_type_client"></div>
+                 </div>
+             </div>
+         </li>
+     	<li id="sc_client"  class="btn btn-primary input-sm navbar-cluster-status-green" style="border-color: #363636">
+     		<i class="fa fa-star-o" id="scimg" title="我要收藏"></i>
+     		<div class="wjl_div_client wjlstop" id="myPopover_client" style="display:none">
+     			<div class="wjl_div_div_client">
+     				标题：<input type="text" name="name" value="" id="name"/>
+     			</div>
+     			<div>
+	      			<button type="button" class="btn input-sm navbar-cluster-status-green" style="border-color: #363636" ng-click="doClientCollections()">
+	      				<i class="fa fa-star-o">收藏</i>
+	      			</button>
+     			</div>
+     		</div>
+     	</li>
+
+     </ul>
+</div>
+<div>
+    <div class="row">
+        <div class="col-md-6 content-panel">
+            <div class="panel-group" id="#restRequestAccordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#restRequestAccordion" target="_self" href="#restRequest">请求</a>
+                        </h4>
+                    </div>
+                    <div id="restRequest" class="panel-collapse collapse in">
+                        <form>
+                            <div class="form-group">
+
+                                <div id ="editor_container" class="eser_ace_container">
+                                    <div id="editor_actions" class="eser_ace_editor_actions">
+                                        <button class="sense-bar" ng-click="sendRequest()"><i class="fa fa-arrow-right"></i>&nbsp;提交</button>
+                                        <button class="sense-bar m5px" id="copy_as_all_curl"><i class="fa fa-copy"></i>&nbsp;复制</button>
+                                        <button class="sense-bar m5px" ng-click="formatAll()"><i class="fa fa-code"></i>&nbsp;美化</button>
+                                    </div>
+                                    <div id="rest-client-editor" class="eser_editor kopf-ace-editor ace-kopf" style="height: 675px"></div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 content-panel">
+            <div class="panel-group" id="#restResponseAccordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#restResponseAccordion" target="_self" href="#restResponse">响应</a>
+                        </h4>
+                    </div>
+                    <div id="restResponse" class="panel-collapse collapse in" style="min-height: 691px">
+                        <div class="panel-body">
+                            <div ng-show="response">
+                                <kopf-json-tree class="explain-response" style="min-height: 614px" kopf-bind="response"/>
+                            </div>
+                            <div class="explanation-result" ng-repeat="explanationResult in explanationResults track by explanationResult.documentId">
+                                <div class="explanation-result-title">{{explanationResult.documentId}} {{explanationResult._score}}</div>
+                                <div ng-hide="explanationResult._explanation">
+                                    This result has no score explanation.
+                                    Use <code>_search?explain=true</code> or <code>_explain</code>.
+                                </div>
+                                <div ng-show="explanationResult.explanationTreeData">
+                                    <tree-dnd tree-data="explanationResult.explanationTreeData"
+                                              expand-on = "explanationTreeConfig.expandOn"
+                                              column-defs = "explanationTreeConfig.columnDefs"/>
+                                </div>
+                                <div ng-show="explanationResult._source">
+                                    <kopf-json-tree class="explain-result-source" style="min-height: 614px" kopf-bind="explanationResult._source"/>
+                                    </tab>
+                                    <div ng-show="explanationResult.fields">
+                                        <kopf-json-tree class="explain-result-source" style="min-height: 614px" kopf-bind="explanationResult.fields"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-panel action-buttons">
+                    <button type="button" class="btn btn-default input-sm" ng-click="exportAsCSV()">
+                        <i class="fa"></i> CSV 导出
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="jqxLoaderClient"></div>
+

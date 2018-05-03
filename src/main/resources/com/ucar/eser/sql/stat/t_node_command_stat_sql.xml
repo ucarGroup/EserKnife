@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.stat.NodeCommandStatDao">
+
+    <typeAlias alias="nodeCommandStatInfo" type="com.ucar.eser.core.bean.vo.stat.NodeCommandStatInfo"></typeAlias>
+    <sql id="stat_info">
+        t.id AS id,
+        t.cluster_name AS clusterName,
+        t.node_host AS nodeHost,
+        t.command_name AS commandName,
+        t.total AS total,
+        t.interval_total AS intervalTotal,
+        t.time AS time,
+        t.interval_time AS intervalTime,
+        t.collect_time AS collectTime,
+        t.execute_time AS executeTime
+    </sql>
+    
+    <!-- 根据时间，集群、结点ip， 线程池类型查询打点信息 -->
+    <select id="getList" parameterClass="nodeCommandStatInfo" resultClass="nodeCommandStatInfo">
+        SELECT <include refid="stat_info"/>
+        FROM es_node_commands_stat t
+        WHERE  t.cluster_name = #clusterName# 
+          AND  t.node_host = #nodeHost#
+          AND  t.command_name = #commandName#
+          AND  t.collect_time between #startTime# and #endTime#
+    </select>
+    
+    <insert id="insertStat" parameterClass="nodeCommandStatInfo">
+        INSERT INTO es_node_commands_stat
+            (id,
+             cluster_name,
+             node_host,
+             command_name,
+             total,
+             interval_total,
+             time,
+             interval_time,
+             collect_time,
+             execute_time)
+		VALUES (#id#,
+		        #clusterName#,
+		        #nodeHost#,
+		        #commandName#,
+		        #total#,
+		        #intervalTotal#,
+		        #time#,
+		        #intervalTime#,
+		        #collectTime#,
+		        #executeTime#)
+    </insert>
+    
+    
+    <!-- 根据插入时间，集群、结点ip， 线程池类型查询打点信息 -->
+    <select id="getStatInfos" parameterClass="nodeCommandStatInfo" resultClass="nodeCommandStatInfo">
+        SELECT <include refid="stat_info"/>
+        FROM es_node_commands_stat t
+        WHERE  t.cluster_name = #clusterName# 
+          AND  t.node_host = #nodeHost#
+          AND  t.collect_time = #collectTime#
+    </select>
+    
+</sqlMap>

@@ -1,0 +1,154 @@
+<style>
+
+    .course-listing {
+        background-color: #333;
+        #box-shadow: 0 1px #ddedf1;
+        border: 1px solid #ddedf1;
+        padding: 0;
+        border-radius: 3px;
+        cursor: pointer;
+        margin-bottom: 50px;
+        height: 50px
+    }
+
+    .course-listing:hover {
+        box-shadow: 0 0 0 1px #91cbd7;
+        border: 1px solid #91cbd7;
+        -webkit-transition: all linear .1s;
+        transition: all linear .1s
+    }
+
+
+
+    .wjl_new_div_common{
+        background-color: #333;
+        height: 25px;
+        line-height: 15px;
+        width: 126px;
+        text-align: center;
+        cursor:pointer;
+        margin-top: 2px;
+        margin-right: 15px;
+        float: left;
+        border: 1px solid #fff;
+        padding: 5px 0px;
+        border-radius: 3px;
+    }
+    .wjl_new_div_common:hover{
+        box-shadow: 0 0 0 1px #91cbd7;
+        border: 1px solid #91cbd7;
+        color: #91cbd7;
+
+        -webkit-transition: all linear .1s;
+        transition: all linear .1s
+    }
+    .select{
+        color: #91cbd7;
+        box-shadow: 0 0 0 1px #91cbd7;
+        border: 1px solid #91cbd7;
+    }
+
+    .select_clustom_time{
+        background-color: #333;
+        cursor:pointer;
+        float:left;
+        margin-right: 15px;
+        border: 1px solid #fff;
+        padding: 3px 18px;
+        border-radius: 3px;
+    }
+    .select_clustom_time:hover{
+        box-shadow: 0 0 0 1px #91cbd7;
+        border: 1px solid #91cbd7;
+        color: #91cbd7;
+
+        -webkit-transition: all linear .1s;
+        transition: all linear .1s
+    }
+
+    .select_time{
+        float:left;
+        margin-top: 25px;
+        margin-right: 10px;
+    }
+</style>
+<script type="text/javascript">
+
+    var source = [
+        { label: "摘要",id:"summaryGroup", expanded: true, items: [
+            { label: "资源使用占比",value:'summary',id:'resouceUsedCheckBox'},
+            { label: "堆内存",value:'summary',id:'heapMemCheckBox' },
+            { label: "垃圾回收",value:'summary',id:'GCCheckBox'},
+            { label: "索引段",value:'summary',id:'indicesSegmentsCheckBox'}
+        ]
+        },
+        { label: "索引",id:"indicesGroup", expanded: true, items: [
+            { label: "每分钟搜索次数",value:"indices",id:'search_requests_per_secondCheckBox'},
+            { label: "每分钟搜索耗时",value:"indices",id:'search_time_per_secondCheckBox' },
+            { label: "每分钟索引次数",value:"indices",id:'indexing_requests_per_secondCheckBox' },
+            { label: "每分钟索引耗时",value:"indices",id:'indexing_time_per_secondCheckBox'},
+            { label: "每分钟Get次数",value:"indices",id:'get_requests_per_secondCheckBox'},
+            { label: "每分钟Get耗时",value:"indices",id:'get_time_per_secondCheckBox'}
+        ]
+        },
+        { label: "线程池",id:"thread_poolsGroup", expanded: true, items: [
+            { label: "search",value:"thread_pools",id:'searchCheckBox'},
+            { label: "index",value:"thread_pools",id:'indexCheckBox'},
+            { label: "bulk",value:"thread_pools",id:'bulkCheckBox'},
+            { label: "refresh",value:"thread_pools",id:'refreshCheckBox'}
+        ]
+        },
+        { label: "其他",id:"osGroup", expanded: true, items: [
+            { label: "JVM线程池",value:"os",id:'threadsCheckBox'},
+            { label: "系统内存",value:"os" ,id:'memCheckBox'},
+            { label: "通道连接",value:"os" ,id:'channelsCheckBox'},
+            { label: "通道流量",value:"os" ,id:'transport_sizeCheckBox'}
+        ]
+        },
+    ];
+</script>
+<div class="container-fluid" style="height: 1800px;" >
+    <div class="row" style="">
+        <div id='jqxWidget' style="position: fixed;z-index: 100;right: 20px; ">
+            <div id="dropDownButton" style="padding-left: 7px;background-image: url()">
+                <div style="border: none;" id='jqxTreeCookie'>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin: 15px;">
+        <div class="col-xs-12">
+                <table style="border: 0px;font-size: 13px;font-family: 'segoe ui', arial, sans-serif;">
+                    <tr>
+                        <td>
+                            <div style="float: left;padding-top:5px"> 节点名称：</div>
+                            <div class="clusterNode wjl_new_div_common" ng-repeat="ip in ips track by $index">
+                                {{ip}}
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="float:left;margin-top: 31px;">
+                                <div class="" style="float:left;">时间范围：</div>
+                                <div data="1" class="select_clustom_time">近1小时</div>
+                                <div data="72" class="select_clustom_time" >近3天</div>
+                                <div data="168" class="select_clustom_time" >近一周</div>
+                            </div>
+                            <div class="select_time">
+                                <input type="text" class="form-control monitor_wjl"  id='startTime4Stat' />
+                            </div>
+                            <div class="select_time" style="margin-top: 29px;">
+                                <strong>至</strong>
+                            </div>
+                            <div class="select_time">
+                                <input type="text" class="form-control monitor_wjl"  id='endTime4Stat' />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+        </div>
+    </div>
+    <div class="row col-xs-12" id="statEchart"></div>
+</div>
+

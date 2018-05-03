@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.clusterManager.clusterInfoDao">
+
+    <typeAlias alias="clusterInfo" type="com.ucar.eser.core.bean.po.ClusterInfo"></typeAlias>
+
+    <sql id="cluster_info">
+        t.id AS id,
+        t.product_line AS productLine,
+        t.cluster_name AS clusterName,
+        t.cluster_describe AS clusterDescribe,
+        t.hosts AS hosts,
+        t.http_port AS httpPort,
+        t.tcp_port AS tcpPort,
+        t.monitor_role_name AS monitorRoleName,
+        t.monitor_role_pwd AS monitorRolePwdCiphertext,
+        t.admin_role_name AS adminRoleName,
+        t.admin_role_pwd AS adminRolePwdCiphertext,
+        t.operate_time AS operateTime
+    </sql>
+
+    <select id="getList" parameterClass="string" resultClass="clusterInfo">
+        SELECT <include refid="cluster_info"/>
+        FROM ES_CLUSTER_INFO t
+        <isNotEmpty prepend="WHERE">
+			<![CDATA[	t.product_line = #productLine#		]]>
+		</isNotEmpty>
+    </select>
+
+    <select id="getClusterInfoById" parameterClass="long" resultClass="clusterInfo">
+        SELECT <include refid="cluster_info"/>
+        FROM ES_CLUSTER_INFO t
+        WHERE t.id = #id#
+    </select>
+
+    <insert id="addClusterInfo" parameterClass="clusterInfo">
+        INSERT INTO `es_cluster_info`
+            (`product_line`,
+             `cluster_name`,
+             `cluster_describe`,
+             `hosts`,
+             `http_port`,
+             `tcp_port`,
+             `monitor_role_name`,
+             `monitor_role_pwd`,
+             `admin_role_name`,
+             `admin_role_pwd`,
+             `operate_time`)
+		VALUES (#productLine#,
+		        #clusterName#,
+		        #clusterDescribe#,
+		        #hosts#,
+		        #httpPort#,
+		        #tcpPort#,
+		        #monitorRoleName#,
+		        #monitorRolePwdCiphertext#,
+		        #adminRoleName#,
+		        #adminRolePwdCiphertext#,
+		        now());
+		<selectKey resultClass="long" keyProperty="id"> 
+			SELECT last_insert_id()  AS ID		
+	    </selectKey>
+    </insert>
+    
+    <update id="updateClusterInfo" parameterClass="clusterInfo">
+    	UPDATE `es_cluster_info`
+		SET `product_line` = #productLine#,
+			`cluster_name` = #clusterName#,
+			`cluster_describe` = #clusterDescribe#,
+			`hosts` = #hosts#,
+			`http_port` = #httpPort#,
+			`tcp_port` = #tcpPort#,
+			`monitor_role_name` = #monitorRoleName#,
+			`monitor_role_pwd` = #monitorRolePwdCiphertext#,
+			`admin_role_name` = #adminRoleName#,
+			`admin_role_pwd` = #adminRolePwdCiphertext#,
+			`operate_time` = now()
+		WHERE `id` = #id#;
+    </update>
+    
+    <delete id="deleteClusterInfoById" parameterClass="long">
+       DELETE FROM `es_cluster_info` WHERE id = #id#
+    </delete>
+    
+    <select id="checkExist" parameterClass="clusterInfo" resultClass="int"> 
+        SELECT count(1)
+        FROM ES_CLUSTER_INFO t WHERE t.cluster_name = #clusterName#
+        <isNotEmpty prepend="AND" property="id" >
+			<![CDATA[	t.id != #id#  ]]>
+		</isNotEmpty>
+    </select>
+
+</sqlMap>

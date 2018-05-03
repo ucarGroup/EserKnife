@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="es.os.log">
+
+
+
+    <insert id="batchInsert" parameterClass="nodeOSStatInfo">
+      insert into es_os_log (
+          cluster_id
+          ,create_time
+          ,host
+          ,cpu_percent
+          ,load_average
+          ,mem_free
+          ,mem_free_percent
+          ,mem_total
+          ,mem_used
+          ,mem_used_percent
+          ,swap_free
+          ,swap_total
+          ,swap_used
+        ) VALUES (
+           #clusterId#
+          ,#createTime#
+          ,#host#
+          ,#cpuPercent#
+          ,#loadAverage#
+          ,#memFree#
+          ,#memFreePercent#
+          ,#memTotal#
+          ,#memUsed#
+          ,#memUsedPercent#
+          ,#swapFree#
+          ,#swapTotal#
+          ,#swapUsed#
+        )
+    </insert>
+
+</sqlMap>

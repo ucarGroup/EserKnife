@@ -1,0 +1,171 @@
+<div class="content-panel">
+    <div id="mainSplitter_from_type">
+        <div class="splitter-panel content-panel">
+
+            <div class="panel-group" >
+                <div class="panel panel-default" style="height: 660px">
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            新建类型
+                        </h4>
+                    </div>
+                    <div>
+                        <div class="panel-body">
+                            <div style="max-width: 680px;min-width: 550px">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input id="field_type" type="text" ng-model="field_type" class="form-control input-sm" placeholder="输入新类型名称">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <div id="type-index-combobox"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 5px">
+                                    <span style="float: left;margin-left: 0px;font-size: 13px">定义字段映射</span>
+                                    <span style="float: left;padding-top:2px;margin-left: 30px;color: #1c7efb;font-size: 12px" id="enablehover_from_type">使用映射工具</span>
+                                </div>
+                                <div>
+                                    　　　　<div style="float:left"></div>
+                                    　　　　<div style="float:left"></div>
+                                    　　　　<div style="clear:both"></div>
+                                    　　</div>
+                                <div id="type-settings-editor" class="kopf-ace-editor create-index-editor"></div>
+
+                                <div class="col-lg-12" style="margin-top: 15px">
+                                    <span class="pull-right">
+                                        <button type="button" class="btn btn-default sm" style="margin-right: 15px"
+                                                ng-click='editor.format()'>格式化
+                                        </button>
+                                        <button type="button" class="btn btn-primary sm" ng-click='promptUpdateIndex()'>提交</button>
+                                        <a id="submitA_from_type" data-toggle="modal" href="#confirm_dialog2"
+                                           class="btn btn-primary input-sm hide"
+                                           target="_self">提交</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="splitter-panel col-md-6 content-panel">
+            <div class="panel-group">
+                <div class="panel panel-default" style="height: 660px">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            字段映射工具
+                        </h4>
+                    </div>
+                    <div>
+                        <form>
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-xs-12" style="color:#1c7efb;margin-top: 5px;">
+                                        <span style='font-size:13px;float: left' id='jqxRadioSql_from_type'>
+                                            通过SQL转换
+                                        </span>
+                                        <span style='font-size:13px;float: left;margin-left: 20px' id='jqxRadioDB_from_type'>
+                                            直接选择表字段
+                                        </span>
+                                         <span style='font-size:13px;float: left;margin-left: 20px' id='jqxRadioDemo_from_type'>
+                                             字段模板
+                                        </span>
+                                    </div>
+                                </div>
+                                <div id="sql_view_from_type" >
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-xs-12">
+                                            <textarea id="sqlArea_from_type"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px">
+                                        <div class="col-xs-12">
+                                            <button type="button" class="btn btn-primary sm" ng-click='generateSqlArea()' style="margin-left: 10px">
+                                                转换
+                                            </button>
+                                            <button type="button" class="btn btn-primary sm" ng-click='clearSqlArea()' style="margin-left: 20px">
+                                                重置
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div id="col_view_from_type" style="display: none">
+                                    <div class="row" style="margin-top: 20px">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-label">数据源</label>
+                                                <select ng-model="dsname" class="form-control input-sm">
+                                                    <option ng-repeat="ds in ds_names" value="{{ ds.id }}">{{ ds.dataSourceName
+                                                        }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="form-label">表名</label>
+                                                <select ng-model="tabName"
+                                                        class="form-control input-sm">
+                                                    <option value="">选择表名</option>
+                                                    <option ng-repeat="tab in tabs" value="{{ tab.name }}">{{ tab.name
+                                                        }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 5px">
+                                        <div class="col-xs-12">
+                                            <div id="dbcol-grid_from_type"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 15px">
+                                        <div class="col-xs-12">
+                                            <button type="button" class="btn btn-primary sm" style="margin-left: 10px" ng-click='generate()'>转换
+                                            </button>
+                                            <button type="button" class="btn btn-primary sm" style="margin-left: 20px" ng-click='clear()'>重置
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div id="demo_view_from_type" style="display: none;margin-top: 51px;">
+                                    <div class="row" style="margin-top: 5px">
+                                        <div class="col-xs-12">
+                                            <div id="demo-grid_from_type"></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" style="margin-top: 15px">
+                                        <div class="col-xs-12">
+                                            <button type="button" class="btn btn-primary sm" style="margin-left: 10px" ng-click='generateDemo()'>转换
+                                            </button>
+                                            <button type="button" class="btn btn-primary sm" style="margin-left: 20px" ng-click='clearDemo()'>重置
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

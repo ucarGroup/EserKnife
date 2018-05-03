@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="es.common.log">
+
+
+    <insert id="batchInsert" parameterClass="nodeCommonStatInfo">
+        insert into es_common_log (
+           cluster_id
+          ,cluster_status
+          ,create_time
+          ,data_node_count
+          ,doc_count
+          ,indice_count
+          ,node_count
+          ,shard_count
+          ,store_size
+        ) VALUES (
+          #clusterId#
+          ,#clusterStatus#
+          ,#createTime#
+          ,#dataNodeCount#
+          ,#docCounts#
+          ,#indicesCount#
+          ,#nodeCount#
+          ,#shardCounts#
+          ,#storeSize#
+        )
+    </insert>
+
+    <select id="getLastByParams" parameterClass="nodeCommonStatInfo" resultClass="nodeCommonStatInfo">
+
+        SELECT cluster_status as clusterStatus,create_time as createTime
+        FROM es_common_log where cluster_id = #clusterId# order by create_time desc limit 1
+    </select>
+</sqlMap>

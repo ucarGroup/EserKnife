@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC
+        "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="es.indices.log">
+    <insert id="batchInsert" parameterClass="nodeIndiceStatInfo">
+        insert into es_indices_log (
+           cluster_id
+          ,create_time
+          ,host
+          ,docs_count
+          ,store_size_in_bytes
+          ,segments_count
+          ,indexing_index_total
+          ,indexing_index_time_in_millis
+          ,indexing_delete_total
+          ,indexing_delete_time_in_millis
+          ,get_total
+          ,get_time_in_millis
+          ,get_exists_total
+          ,get_exists_time_in_millis
+          ,get_missing_total
+          ,get_missing_time_in_millis
+          ,search_query_total
+          ,search_query_time_in_millis
+          ,search_fetch_total
+          ,search_fetch_time_in_millis
+          ,field_data_memory_size_in_bytes
+          ,field_data_evictions
+        ) VALUES (
+           #clusterId#
+          ,#createTime#
+          ,#host#
+          ,#docsCount#
+          ,#storeSizeInBytes#
+          ,#segmentsCount#
+          ,#indexingIndexTotal#
+          ,#indexingIndexTimeInMillis#
+          ,#indexingDeleteTotal#
+          ,#indexingDeleteTimeInMillis#
+          ,#getTotal#
+          ,#getTimeInMillis#
+          ,#getExistsTotal#
+          ,#getExistsTimeInMillis#
+          ,#getMissingTotal#
+          ,#getMissingTimeInMillis#
+          ,#searchQueryTotal#
+          ,#searchQueryTimeInMillis#
+          ,#searchFetchTotal#
+          ,#searchFetchTimeInMillis#
+          ,#fielddataMemorySizeInBytes#
+          ,#fielddataEvictions#
+        )
+    </insert>
+</sqlMap>

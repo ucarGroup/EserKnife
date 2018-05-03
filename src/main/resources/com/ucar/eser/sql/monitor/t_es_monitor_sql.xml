@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC
+        "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="es.monitor">
+    <select id="getOsMonitorInfo" parameterClass="map" resultClass="nodeOSStatInfo">
+        <![CDATA[
+            select host,cpu_percent as cpuPercent,mem_used_percent as memUsedPercent,
+            mem_free as memFree,mem_used as memUsed,
+            create_time as createTime
+            from es_os_log where cluster_id = #clusterId# and host =#host# and create_time >=#startTime# and create_time <= #endTime#
+            ORDER  by create_time
+        ]]>
+    </select>
+
+    <select id="getJvmMonitorInfo" parameterClass="map" resultClass="nodeJVMStatInfo">
+        <![CDATA[
+          select create_time as createTime,
+          threads_count as threadsCount,
+          threads_peak_count as threadsPeakCount,
+          heap_used_in_bytes as heapUsedInBytes,heap_committed_in_bytes as heapCommittedInBytes
+          from es_jvm_log where cluster_id = #clusterId# and host =#host# and create_time >=#startTime# and create_time <= #endTime#
+          order by create_time desc
+        ]]>
+    </select>
+    
+    <select id="getGcMonitorInfo" parameterClass="map" resultClass="nodeJVMStatInfo">
+        <![CDATA[
+          select create_time as createTime,interval_young_collection_count as intervalYoungCollectionCount,interval_old_collection_count as intervalOldCollectionCount
+          from es_jvm_log where cluster_id = #clusterId# and host =#host# and create_time >=#startTime# and create_time <= #endTime#
+          order by create_time desc
+        ]]>
+    </select>
+
+    <select id="getIndicesMonitorInfo" parameterClass="map" resultClass="nodeIndiceStatInfo">
+        <![CDATA[
+            select create_time as createTime
+            ,host as host
+            ,docs_count as docsCount
+            ,store_size_in_bytes as storeSizeInBytes
+            ,segments_count as segmentsCount
+            ,indexing_index_total as indexingIndexTotal
+            ,indexing_index_time_in_millis as indexingIndexTimeInMillis
+            ,indexing_delete_total as  indexingDeleteTotal
+            ,indexing_delete_time_in_millis as  indexingDeleteTimeInMillis
+            ,get_total as getTotal
+            ,get_time_in_millis as getTimeInMillis
+            ,get_exists_total as getExistsTotal
+            ,get_exists_time_in_millis as getExistsTimeInMillis
+            ,get_missing_total as getMissingTotal
+            ,get_missing_time_in_millis as getMissingTimeInMillis
+            ,search_query_total as searchQueryTotal
+            ,search_query_time_in_millis as searchQueryTimeInMillis
+            ,search_fetch_total as searchFetchTotal
+            ,search_fetch_time_in_millis as searchFetchTimeInMillis
+            ,field_data_memory_size_in_bytes as fielddataMemorySizeInBytes
+            ,field_data_evictions  as fielddataEvictions
+            from es_indices_log where cluster_id = #clusterId# and host =#host# and
+            create_time >=#startTime# and create_time <= #endTime#
+          order by create_time
+        ]]>
+    </select>
+
+    <select id="getThreadPoolMonitorInfo" parameterClass="map" resultClass="nodeThreadPoolStatInfo">
+        <![CDATA[
+        select  create_time as createTime
+          ,host as host
+          ,active as active
+          ,completed as completed
+          ,interval_completed as intervalCompleted
+          ,intervalRejected as intervalRejected
+          ,largest as largest
+          ,queue as queue
+          ,rejected as rejected
+          ,threads as threads from es_thread_pool_log where cluster_id = #clusterId# and host =#host# and
+            create_time >=#startTime# and create_time <= #endTime# AND thread_type = #dataType#
+          order by create_time
+        ]]>
+    </select>
+
+
+    <select id="getTransportMonitorInfo" parameterClass="map" resultClass="nodeTransportStatInfo">
+        <![CDATA[
+         select  create_time as createTime
+          ,server_open as server_open
+           ,rx_size_in_bytes
+           ,tx_size_in_bytes from es_transport_log where cluster_id = #clusterId# and host =#host# and
+            create_time >=#startTime# and create_time <= #endTime#
+          order by create_time
+        ]]>
+    </select>
+
+    <select id="getHttpMonitorInfo" parameterClass="map" resultClass="nodeHttpStatInfo">
+        <![CDATA[
+          select  create_time as createTime
+          ,current_open as current_open from es_http_log where cluster_id = #clusterId# and host =#host# and
+            create_time >=#startTime# and create_time <= #endTime#
+          order by create_time
+        ]]>
+    </select>
+</sqlMap>

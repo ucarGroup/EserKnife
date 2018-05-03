@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.sechedule.QuartzDao">
+
+    <typeAlias alias="triggerInfo" type="com.ucar.eser.core.bean.po.TriggerInfo"></typeAlias>
+
+    <sql id="quartz_triggers_columns">
+        t.SCHED_NAME AS schedName,
+        t.TRIGGER_NAME AS triggerName,
+        t.TRIGGER_GROUP AS triggerGroup,
+        t.JOB_NAME AS jobName,
+        t.JOB_GROUP AS jobGroup,
+        t.DESCRIPTION AS description,
+        t.NEXT_FIRE_TIME AS nextFireTime,
+        t.PREV_FIRE_TIME AS prevFireTime,
+        t.PRIORITY AS priority,
+        t.TRIGGER_STATE AS triggerState,
+        t.TRIGGER_TYPE AS triggerType,
+        t.START_TIME AS startTime,
+        t.END_TIME AS endTime,
+        t.CALENDAR_NAME AS calendarName,
+        t.MISFIRE_INSTR AS misfireInstr
+    </sql>
+
+    <!--查询job分组下的所有trigger-->
+    <select id="getTriggersByJobGroup" resultClass="triggerInfo" parameterClass="string">
+        SELECT <include refid="quartz_triggers_columns"/>
+        FROM ES_QRTZ_TRIGGERS t
+        WHERE JOB_GROUP = #jobGroup#;
+    </select>
+
+    <!--返回所有trigger-->
+    <select id="getAllTriggers" resultClass="triggerInfo">
+        SELECT <include refid="quartz_triggers_columns"/>, ifnull(ct.CRON_EXPRESSION,'') cron
+        FROM ES_QRTZ_TRIGGERS t
+        LEFT JOIN ES_QRTZ_CRON_TRIGGERS ct
+        on (t.SCHED_NAME = ct.SCHED_NAME and t.TRIGGER_NAME = ct.TRIGGER_NAME and t.TRIGGER_GROUP=ct.TRIGGER_GROUP)
+    </select>
+
+    <!--查询trigger：模糊匹配trigger name或trigger group-->
+    <select id="searchTriggerByNameOrGroup" resultClass="triggerInfo" parameterClass="string">
+        SELECT <include refid="quartz_triggers_columns"/>, ifnull(ct.CRON_EXPRESSION,'') cron
+        FROM ES_QRTZ_TRIGGERS t
+        LEFT JOIN ES_QRTZ_CRON_TRIGGERS ct
+        on (t.SCHED_NAME = ct.SCHED_NAME and t.TRIGGER_NAME = ct.TRIGGER_NAME and t.TRIGGER_GROUP=ct.TRIGGER_GROUP)
+        WHERE t.TRIGGER_NAME REGEXP #queryString#
+        OR t.TRIGGER_GROUP REGEXP #queryString#;
+    </select>
+
+</sqlMap>

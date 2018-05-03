@@ -1,0 +1,45 @@
+<div class="container-fluid" style="height: 1800px;" >
+    <div class="row" style="height: 85%;">
+        <div class="col-md-12">
+            <div id="operationDiv" style="padding-top: 20px">
+                <div >
+                    <table style="border: 0px">
+                        <tr>
+                            <td>
+                                <div style="">
+                                    <input type="text" class="form-control" id='startTime4Slowlog' />
+                                </div>
+                            </td>
+                            <td>
+                                <div style="padding-left: 6px">
+                                    <strong>至</strong>
+                                </div>
+                            </td>
+                            <td>
+                                <div style="padding-left: 6px;">
+                                    <input type="text" class="form-control" id='endTime4Slowlog' />
+                                </div>
+                            </td>
+                            <td>
+                                <div style="padding-left: 30px" method="search">
+                                    <button type="button" class="btn btn-primary" ng-click="redrawStatPic()">
+                                        <span style="word-spacing: 5px;">查&nbsp;询</span>
+                                    </button>
+
+                                </div>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div id="curRow">
+                <div ng-repeat="aStatId in nodeStats" id="slowLogPlace{{aStatId.id}}" style="margin-top: 20px;float:left" ></div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>

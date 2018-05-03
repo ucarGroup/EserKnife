@@ -1,0 +1,70 @@
+<div class="content-panel">
+    <div class="col-md-12 content-panel">
+        <div class="panel-group">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <span >导入索引</span>
+                    </h4>
+                </div>
+                <div>
+                    <div class="panel-body">
+                        <form id="indicesForm">
+                            <div class="form-group">
+                                <div class="row" style="margin-top: 10px">
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <input id="cluster_addr" type="text" ng-model="cluster_addr" class="form-control input-sm" placeholder="集群IP或主机名">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1">
+                                        <div class="form-group">
+                                            <input id="cluster_port" type="text" ng-model="cluster_port" class="form-control input-sm" placeholder="端口">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group">
+                                            <input id="cluster_userpass" type="text" ng-model="cluster_userpass" class="form-control input-sm" placeholder="user:pass,可不填">
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <div class="form-group" style="padding-top: 0px">
+                                            <button type="button" class="btn btn-primary sm" ng-click='loadIndex()' style="">拉取集群索引</button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div ng-show="showIndexPanel" >
+                                    <div class="row" style="padding-top: 8px;padding-bottom: 2px">
+                                        <div class="col-xs-12">
+                                            <label style="font-size: 13px">索引列表</label>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="padding-top: 5px;padding-bottom: 2px">
+                                        <div class="col-xs-7">
+                                            <div id="remote-index-grid"></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-xs-12">
+                                            <div class="form-group" style="padding-top: 10px">
+                                                <button type="button" class="btn btn-primary sm" ng-click='importIndex()' style="margin-top: 5px">导入至本地集群</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-12">
+				<span class="pull-right">
+                    <a id="submitCreateIndex" data-toggle="modal" href="#confirm_dialog" class="btn btn-primary input-sm hide" target="_self">提交</a>
+				</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

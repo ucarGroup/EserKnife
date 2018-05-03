@@ -1,0 +1,120 @@
+<div class="navbar navbar-fixed-top navbar-cluster-status-{{clusterStatus}}" ng-controller="NavbarController">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle dropdown-toggle navbar-toggle-{{clusterStatus}}"
+                    data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+              <span class="navbar-brand navbar-cluster-status-{{clusterStatus}}">
+                <i class="fa fa-fw fa-circle navbar-logo-action">
+                    <span style="display:block; margin-top: -24px; font-size: 26px; font-weight: 500"
+                          class="navbar-cluster-status-{{clusterStatus}}-nav">E</span>
+                </i>
+              </span>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-cluster-status-{{clusterStatus}}">
+                <li target="cluster" text="cluster" icon="fa-sitemap">
+                    <a href="#!cluster"><i class="fa fa-fw fa-sitemap"></i> 集群</a>
+                </li>
+                <li target="query" text="query" icon="fa-server">
+                    <a href="#!query"><i class="fa fa-fw fa-list"></i> 查询</a>
+                </li>
+
+                <li id="monitor_ul">
+                    <a href="_self" data-toggle="dropdown">
+                        <i class="fa fa-fw fa-camera"></i> 监控 <i class="fa fa-fw fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- ng-show="isAdmin == 'true' || isProd != 3"-->
+                        <li target="rest" text="rest" icon="fa-edit" >
+                            <a href="/eserknife/bigdesk/index?clusterName={{clusterName4Escloud}}" target="_blank"><i class="fa fa-fw fa-server"></i> <span style="font-size: 13px">实时模式</span></a>
+                        </li>
+                        <li target="newStats" text="stats" icon="fa-server">
+                            <a href="#!newStats"><i class="fa fa-fw fa-history"></i> 历史模式</a>
+                        </li>
+                    </ul>
+                </li>
+                <li target="rest" text="rest" icon="fa-edit">
+                    <a href="#!rest"><i class="fa fa-fw fa-server"></i> <span style="font-size: 13px">客户端</span></a>
+                </li>
+                <li id="index_ul">
+                    <a href="_self" data-toggle="dropdown">
+                        <i class="fa fa-fw fa-transgender-alt"></i> 索引 <i class="fa fa-fw fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+
+                        <li ng-show="isAdmin == 'true' || isProd != 3" target="index_manager" text="stats" icon="fa-server">
+                            <a href="#!indexManager"><i class="fa fa-fw fa-file-o"></i>索引管理</a>
+                        </li>
+
+                     <!--   <li target="index_manager_new" text="stats" icon="fa-server">
+                            <a href="#!indexManagerNew"><i class="fa fa-fw fa-file-o"></i>索引增改</a>
+                        </li>-->
+
+                        <li ng-show="isAdmin == 'true' || isProd != 3" target="aliasManager" text="aliasManager" icon="fa-server">
+                            <a href="#!aliasManager"><i class="fa fa-fw fa-exchange"></i>别名管理</a>
+                        </li>
+
+                       <!-- <li target="re_index" text="stats" icon="fa-server">
+                            <a href="#!reindex"><i class="fa fa-fw  fa-files-o"></i>索引重建</a>
+                        </li>-->
+
+                       <li  target="index_templates" text="stats" icon="fa-server" ng-show="isAdmin == 'true' || isProd != 3">
+                            <a href="#!indexTemplate"><i class="fa fa-fw fa-book"></i>模板管理</a>
+                        </li>
+
+                        <li ng-show="isAdmin == 'true' || isProd != 3" target="importIndex" text="importIndex" icon="fa-server">
+                            <a href="#!importIndex"><i class="fa fa-fw  fa-arrow-circle-down"></i>索引导入</a>
+                        </li>
+                        <li target="analysis" text="stats" icon="fa-server">
+                            <a href="#!analysis"><i class="fa fa-fw fa-puzzle-piece"></i>分词测试</a>
+                        </li>
+
+                    </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-cluster-status-{{clusterStatus}} navbar-right visible-lg"
+                style="margin-right: 10px;">
+               <li ng-show="isAdmin == 'true'">
+               		<a href="/eserknife/index/nav" target="_blank"><i class="ace-icon fa fa-sign-in"></i> <span style="font-size: 13px">跳转到后台</span></a>
+               </li>
+                <li class="connection-info" ng-show="clusterName">
+                    {{fingurePrint}}
+                </li>
+                <li ng-show="isAdmin == 'false'">
+                	<a href="#" id="logout"><i class="ace-icon fa fa-power-off"></i> <span style="font-size: 13px">Logout</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $('.dropdown-menu input').click(function (e) {
+            e.stopPropagation();
+        });
+        $('.dropdown-menu select').click(function (e) {
+            e.stopPropagation();
+        });
+        
+     	$("#logout").click(function () {
+            $.ajax({
+                type : "post",
+                url : CAR_PATH + "/user/logout",
+                dataType : "json",
+                data : "",
+                async : true,
+                success : function(data) {
+                    if(data.result){
+                        window.location.href =  CAR_PATH +"/login.jsp?_r="+Math.random() ;
+                        return;
+                    }
+                	alert(data.msg);
+                }
+            });
+        });
+    });
+</script>

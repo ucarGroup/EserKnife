@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+    <!-- 配置SQL MAP CLIENT 参数 -->
+    <settings cacheModelsEnabled="true"
+              enhancementEnabled="true"
+              lazyLoadingEnabled="true"
+              maxRequests="128" maxSessions="80"
+              errorTracingEnabled="true"
+              maxTransactions="60"
+              useStatementNamespaces="true"
+    />
+
+
+    <!-- 别名配置文件 -->
+    <sqlMap resource="com/ucar/eser/spring/ibatis_common.xml" />
+
+</sqlMapConfig>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<groups xmlns="http://www.isdc.ro/wro">
+    <!--需要压缩的资源，name为压缩后的文件名-->
+    <group name='kopf'>
+        <css>/resources/kopf/css/lib.css</css>
+        <css>/resources/kopf/css/kopf.css</css>
+        <css>/resources/kopf/css/stat.css</css>
+        <css>/resources/kopf/css/dark_style.css</css>
+
+        <js>/resources/kopf/js/kopf.js</js>
+        <js>/resources/kopf/js/util.js</js>
+        <js>/resources/kopf/js/elastic/*</js>
+        <js>/resources/kopf/js/directives/*</js>
+        <js>/resources/kopf/js/filters/filter.js</js>
+        <js>/resources/kopf/js/services/*</js>
+        <js>/resources/kopf/js/controllers/*</js>
+        <js>/resources/kopf/js/frontIndex.js</js>
+    </group>
+
+    <group name='thirdparty'>
+        <css>/resources/thirdparty/jquery.datatable/css/jquery.dataTables.css</css>
+        <css>/resources/thirdparty/jquery.datatable/css/jquery.dataTables_themeroller.css</css>
+        <css>/resources/thirdparty/datatimepicker/bootstrap-datetimepicker.css</css>
+
+<!--        <css>/resources/thirdparty/jqwidgets/styles/jqx.base.css</css>
+        <css>/resources/thirdparty/jqwidgets/styles/jqx.ui-sunny.css</css>
+        <css>/resources/thirdparty/jqwidgets/styles/jqx.metrodark.css</css>-->
+
+        <js>/resources/thirdparty/jquery/jquery-1.11.1.min.js</js>
+        <js>/resources/thirdparty/jquery.datatable/js/jquery.dataTables.js</js>
+        <js>/resources/thirdparty/bootstrap/js/bootstrap.js</js>
+        <js>/resources/thirdparty/angularjs/angular.min.js</js>
+        <js>/resources/thirdparty/angularjs/angular-animate.min.js</js>
+        <js>/resources/thirdparty/angularjs/angular-route.min.js</js>
+        <js>/resources/thirdparty/angular-tree-dnd/ng-tree-dnd.js</js>
+        <js>/resources/thirdparty/csv/csv.js</js>
+        <js>/resources/thirdparty/csv/jquery.csv.js</js>
+        <js>/resources/thirdparty/jsontree/jsontree.min.js</js>
+        <js>/resources/thirdparty/typeahead/typeahead.js</js>
+
+        <js>/resources/thirdparty/datatimepicker/bootstrap-datetimepicker.js</js>
+        <js>/resources/thirdparty/echart/echarts.js</js>
+        <js>/resources/thirdparty/echart/theme/dark.js</js>
+        <!--<js>/resources/thirdparty/jqwidgets/jqx-all.js</js>
+        <js>/resources/thirdparty/jqwidgets/globalization/globalization.js</js>
+        <js>/resources/thirdparty/jqwidgets/globalization/globalize.js</js>
+        <js>/resources/thirdparty/sense/es_5_0.js</js>
+        <js>/resources/thirdparty/sense/sense.js</js>-->
+    </group>
+</groups>

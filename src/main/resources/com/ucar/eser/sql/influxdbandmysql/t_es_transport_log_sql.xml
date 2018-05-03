@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="es.transport.log">
+
+    <insert id="batchInsert" parameterClass="nodeTransportStatInfo">
+        insert into es_transport_log (
+           cluster_id
+          ,create_time
+          ,host
+          ,rx_count
+          ,rx_size
+          ,server_open
+          ,rx_size_in_bytes
+          ,tx_count
+          ,tx_size
+          ,tx_size_in_bytes
+        ) VALUES (
+           #clusterId#
+          ,#createTime#
+          ,#host#
+          ,#rx_count#
+          ,#rx_size#
+          ,#server_open#
+          ,#rx_size_in_bytes#
+          ,#tx_count#
+          ,#tx_size#
+          ,#tx_size_in_bytes#
+        )
+    </insert>
+
+</sqlMap>

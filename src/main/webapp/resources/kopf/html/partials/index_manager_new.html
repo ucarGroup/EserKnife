@@ -1,0 +1,149 @@
+<!--
+
+<div class="content-panel">
+    <div class="col-md-12 content-panel">
+            <div style="background-color: #222;color: #d0d0d0;" id='typeTools'>
+                <div class="col-md-6" >
+                        <div class="panel-group" id="#newIndexMappingAccordion">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title">
+                                       创建索引
+                                    </h4>
+                                </div>
+                                <div id="newIndexMappingPanel" class="panel-collapse collapse in">
+                                    <div class="panel-body" style="min-height: 500px;">
+                                        <div class="row">
+                                            <div class="col-md-12" style="display: none">
+                                                <form role="form">
+                                                    <div class="row">
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group">
+                                                                <label class="form-label">索引名称</label>
+                                                                <input type="text" style="background: #333;" class="form-control input-sm" ng-model="index.name"  id="indexName"/>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+
+                                                    <div class="eser_ace_container">
+                                                        <div id="type_map_editor_actions" class="eser_ace_editor_actions">
+                                                            <button ng-click="createIndex()">提交</button>
+                                                            <button id="type_map_copy_as_curl">复制</button>
+                                                            <button ng-click="format()">美化</button>
+                                                        </div>
+                                                        <div id="type-map-editor" class="eser_editor kopf-ace-editor ace-kopf" style="height: 490px"></div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel-group">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    字段映射工具
+                                </h4>
+                            </div>
+                            <div class="row" style="margin-right: 1px;margin-left: 1px;margin-top: 10px;">
+                                <div class="col-xs-4">
+                                    <div class="form-group">
+                                        <label class="form-label">别名</label>
+                                        <input id="alias" type="text" ng-model="alias" class="form-control input-sm" placeholder="可不填">
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <form>
+                                    <div class="panel-body">
+                                        <div class="row">
+                                            <div class="col-xs-12" style="color:#1c7efb;margin-top: 5px;">
+                                        <span style='font-size:13px;float: left' id='jqxRadioSqlIndexManager'>
+                                            通过SQL转换
+                                        </span>
+                                        <span style='font-size:13px;float: left;margin-left: 20px' id='jqxRadioDBIndexManager'>
+                                            直接选择表字段
+                                        </span>
+                                            </div>
+                                        </div>
+                                        <div id="sql_viewIndexManager" >
+                                            <div class="row" style="margin-top: 20px">
+                                                <div class="col-xs-12">
+                                                    <textarea id="sqlAreaIndexManager"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 15px">
+                                                <div class="col-xs-12">
+                                                    <button type="button" class="btn btn-primary sm" ng-click='generateSqlArea()' style="margin-left: 10px">
+                                                        转换
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary sm" ng-click='clearSqlArea()' style="margin-left: 20px">
+                                                        重置
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div id="col_viewIndexManager" style="display: none">
+                                            <div class="row" style="margin-top: 20px">
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">数据源</label>
+                                                        <select ng-model="dsnameIndexManager" class="form-control input-sm">
+                                                            <option ng-repeat="ds in ds_names" value="{{ ds.id }}">{{ ds.dataSourceName
+                                                                }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="form-group">
+                                                        <label class="form-label">表名</label>
+                                                        <select ng-model="tabNameIndexManager"
+                                                                class="form-control input-sm">
+                                                            <option value="">选择表名</option>
+                                                            <option ng-repeat="tab in tabs" value="{{ tab.name }}">{{ tab.name
+                                                                }}
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 5px">
+                                                <div class="col-xs-12">
+                                                    <div id="dbcol-gridIndexManager"></div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="margin-top: 15px">
+                                                <div class="col-xs-12">
+                                                    <button type="button" class="btn btn-primary sm" style="margin-left: 10px" ng-click='generate()'>转换
+                                                    </button>
+                                                    <button type="button" class="btn btn-primary sm" style="margin-left: 20px" ng-click='clear()'>重置
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
+
+-->

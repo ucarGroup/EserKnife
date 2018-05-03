@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC
+        "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="data.source.info">
+
+    <sql id="data_source_info">
+        t.id AS id,
+        t.product_line AS productLine,
+        t.data_source_name as dataSourceName,
+        t.data_source_url as dataSourceUrl,
+        t.data_source_user_name as dataSourceUserName,
+        t.data_source_user_pwd as dataSourceUserPwd,
+        t.create_time as createTime,
+        t.update_time as updateTime,
+        t.create_user as createUser,
+        t.update_user as updateUser
+    </sql>
+
+    <select id="getList" parameterClass="string" resultClass="dataSourceInfo">
+        SELECT <include refid="data_source_info"/>
+        FROM es_data_source_info t
+        <isNotEmpty prepend="WHERE">
+            <![CDATA[	t.product_line = #productLine#		]]>
+        </isNotEmpty>
+    </select>
+
+    <select id="getDataSourceInfo" parameterClass="long" resultClass="dataSourceInfo">
+        SELECT <include refid="data_source_info"/>
+        FROM es_data_source_info t
+        WHERE t.id = #id#
+    </select>
+
+    <insert id="insertInfo" parameterClass="dataSourceInfo">
+        INSERT INTO `es_data_source_info`
+        (`product_line`,
+        `data_source_name`,
+        `data_source_url`,
+        `data_source_user_name`,
+        `data_source_user_pwd`,
+        `create_time`,
+        `create_user`)
+        VALUES (#productLine#,
+        #dataSourceName#,
+        #dataSourceUrl#,
+        #dataSourceUserName#,
+        #dataSourceUserPwd#,
+        now(),
+        #createUser#)
+    </insert>
+
+    <update id="updateInfo" parameterClass="dataSourceInfo">
+        UPDATE `es_data_source_info`
+        SET `product_line` = #productLine#,
+        `data_source_name` = #dataSourceName#,
+        `data_source_url` = #dataSourceUrl#,
+         `data_source_user_name` = #dataSourceUserName#,
+        `data_source_user_pwd` = #dataSourceUserPwd#,
+        `update_user` = #updateUser#,
+        `update_time` = now()
+        WHERE `id` = #id#;
+    </update>
+
+    <delete id="deleteInfo" parameterClass="long">
+        DELETE FROM `es_data_source_info` WHERE id = #id#
+    </delete>
+
+    <select id="checkExists" parameterClass="dataSourceInfo" resultClass="int">
+        SELECT count(1)
+        FROM es_data_source_info t WHERE t.data_source_name = #dataSourceName#
+        <isNotEmpty prepend="AND" property="id" >
+            <![CDATA[	t.id != #id#  ]]>
+        </isNotEmpty>
+    </select>
+
+</sqlMap>

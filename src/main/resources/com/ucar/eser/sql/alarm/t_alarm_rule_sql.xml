@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.eser.admin.dao.alarm.AlarmRuleDao">
+
+	<typeAlias alias="alarmRule" type="com.ucar.eser.core.bean.vo.alarm.AlarmRule"></typeAlias>
+
+    <sql id="alarm_rule">
+	      t.id AS id,
+	      t.rule_name as ruleName,
+	      t.cluster_id as clusterId,
+	      t.latitude_sub as latitudeSub,
+	      t.send_user_ids as userNameId,
+		  t.latitude AS latitude,
+		  t.threshold AS threshold,
+		  t.frequency AS frequency,
+		  t.frequency_count AS frequencyCount,
+		  t.alarm_interval AS alarmInterval,
+		  t.extend AS extend,
+		  t.alarm_way AS alarmWay,
+		  t.enable AS enable,
+		  t.operate_time AS operateTime,
+		  t.operate_user AS operateUser,
+		  t.remark AS remark
+    </sql>
+
+	<sql id="alarm_rule_new">
+		t.id AS id,
+		t.rule_name as ruleName,
+		t.cluster_id as clusterId,
+		t.latitude_sub as latitudeSub,
+		t.send_user_ids as userNameId,
+		t.latitude AS latitude,
+		t.threshold AS threshold,
+		t.frequency AS frequency,
+		t.frequency_count AS frequencyCount,
+		t.alarm_interval AS alarmInterval,
+		t.extend AS extend,
+		t.alarm_way AS alarmWay,
+		t.enable AS enable,
+		t.operate_time AS operateTime,
+		t.operate_user AS operateUser,
+		t.remark AS remark,
+		tt.cluster_name AS clusterName
+	</sql>
+
+    <select id="getList" resultClass="alarmRule">
+        SELECT <include refid="alarm_rule_new"/>
+        FROM es_alarm_rule t left join es_cluster_info tt on t.cluster_id = tt.id
+    </select>
+
+	<select id="getAlarmRuleByClusterName" resultClass="alarmRule" parameterClass="map">
+		SELECT <include refid="alarm_rule_new"/>
+		FROM es_alarm_rule t left join es_cluster_info tt on t.cluster_id = tt.id WHERE  tt.cluster_name = #clusterName#
+		and t.enable > 0
+	</select>
+
+    <select id="getAlarmRuleById" parameterClass="long" resultClass="alarmRule">
+        SELECT <include refid="alarm_rule"/>
+        FROM es_alarm_rule t
+        WHERE t.id = #id#
+    </select>
+    
+    <insert id="addAlarmRule" parameterClass="alarmRule">
+        INSERT INTO es_alarm_rule
+            (rule_name,
+             cluster_id,
+	         latitude_sub,
+	     	 send_user_ids,
+	     	 latitude,
+             threshold,
+             frequency,
+             frequency_count,
+             alarm_interval,
+             extend,
+             alarm_way,
+             enable,
+             operate_user,
+             remark)
+		VALUES (
+				#ruleName#,
+				#clusterId#,
+				#latitudeSub#,
+				#userNameId#,
+				#latitude#,
+	            #threshold#,
+	            #frequency#,
+	            #frequencyCount#,
+	            #alarmInterval#,
+	            #extend#,
+	            #alarmWay#,
+	            #enable#,
+	            #operateUser#,
+	            #remark#)
+    </insert>
+    
+    <update id="updateAlarmRule" parameterClass="alarmRule">
+    	UPDATE es_alarm_rule
+		SET   rule_name=#ruleName#,
+			  cluster_id = #clusterId#,
+	          latitude_sub=#latitudeSub#,
+	     	  send_user_ids=#userNameId#,
+			  latitude = #latitude#,
+			  threshold = #threshold#,
+			  frequency = #frequency#,
+			  frequency_count = #frequencyCount#,
+			  alarm_interval = #alarmInterval#,
+			  extend = #extend#,
+			  alarm_way = #alarmWay#,
+			  enable = #enable#,
+			  operate_user = #operateUser#,
+			  remark = #remark#,
+			  operate_time = now()
+		WHERE id = #id#
+    </update>
+    
+    <delete id="deleteAlarmRuleById" parameterClass="long">
+       DELETE FROM es_alarm_rule WHERE id = #id#
+    </delete>
+    
+    <select id="checkExist" parameterClass="alarmRule" resultClass="int"> 
+        SELECT count(1)
+        FROM es_alarm_rule t WHERE t.latitude = #latitude# AND t.cluster_id=#clusterId#
+		AND  t.latitude_sub = #latitudeSub#
+        <isNotEmpty prepend="AND" property="id" >
+			<![CDATA[	t.id != #id#  ]]>
+		</isNotEmpty>
+    </select>
+
+
+	<select id="oldMemUsed" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		select old_mem_used/old_mem_max*100 as result  from es_jvm_log
+		where host =#host# and create_time >= #startDate# and create_time <= #endDate#
+
+		]]>
+	</select>
+
+	<select id="yongMemUsed" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		select young_mem_used/young_mem_max*100 as result  from es_jvm_log
+		where host =#host# and create_time >= #startDate# and create_time <= #endDate#
+		]]>
+	</select>
+
+	<select id="memUsed" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		select mem_used_percent  as result from es_os_log
+		where host =#host# and create_time >= #startDate# and create_time <= #endDate#
+		]]>
+	</select>
+
+	<select id="memFree" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		select mem_free_percent  as result  from es_os_log
+		where host =#host# and create_time >= #startDate# and create_time <= #endDate#
+		]]>
+	</select>
+
+	<select id="loadAverage" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		select load_average  as result  from es_os_log
+		where host =#host# and create_time >= #startDate# and create_time <= #endDate#
+		]]>
+
+	</select>
+	
+	<select id="queue" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		 select queue as result  from es_thread_pool_log where thread_type=#key#
+		 AND host =#host# and create_time >= #startDate# and create_time <= #endDate#
+		]]>
+	</select>
+
+	<select id="freePercent" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		  select free_in_bytes/total_in_bytes*100 as result
+		  from es_fs_log where host =#host# and create_time >= #startDate# and create_time <= #endDate#
+		]]>
+	</select>
+
+	<select id="usedPercent" parameterClass="map" resultClass="com.ucar.eser.core.bean.vo.alarm.AlarmResult">
+		<![CDATA[
+		  select available_in_bytes/total_in_bytes*100 as result
+		  from es_fs_log where host =#host# and create_time >= #startDate# and create_time <= #endDate#
+		]]>
+	</select>
+
+</sqlMap>

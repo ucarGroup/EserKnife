@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.stat.DeleteStatDataDao">
+
+	<typeAlias alias="deleteStatDataVo" type="com.ucar.eser.core.bean.vo.stat.DeleteStatDataVo"></typeAlias>
+
+	<delete id="deleteStatData" parameterClass="deleteStatDataVo">
+		delete from $tableName$ where <![CDATA[$columnName$ < #deleteTime#]]>
+	</delete>
+</sqlMap>

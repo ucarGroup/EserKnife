@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="escloud.clientCollection">
+
+	<typeAlias alias="queryClientCollection" type="com.ucar.eser.core.bean.po.QueryClientCollection"></typeAlias>
+
+	<select id="getQueryCollectionInfos" parameterClass="queryClientCollection" resultClass="queryClientCollection">
+		select id, name, cluster_name as clusterName, 
+		require_url as requireUrl, require_method as requireMethod, 
+		require_content as requireContent, user_name as userName, state, 
+		create_time as createTime  
+		from es_query_client_collection where state=1 and cluster_name=#clusterName# and user_name=#userName# order by create_time desc
+	</select>
+    
+    <insert id="insertQueryClientInfo" parameterClass="queryClientCollection">
+    	 insert into es_query_client_collection (
+		   name
+		  ,cluster_name
+		  ,require_url
+		  ,require_method
+		  ,require_content
+		  ,user_name
+		  ,create_time
+		) VALUES (
+		  #name#
+		  ,#clusterName#
+		  ,#requireUrl#
+		  ,#requireMethod#
+		  ,#requireContent#
+		  ,#userName#
+		  ,now()
+		)
+    </insert>
+    
+    
+    <select id="getDetailBySome" parameterClass="queryClientCollection" resultClass="queryClientCollection">
+    	select  id, name, cluster_name as clusterName,
+		require_url as requireUrl, require_method as requireMethod, 
+		require_content as requireContent, user_name as userName, state, 
+		create_time as createTime  
+		from es_query_client_collection where state=1  
+		<isNotEmpty prepend="and" property="name">
+			name=#name#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="clusterName">
+			cluster_name=#clusterName# 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="userName">
+			user_name = #userName# 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id">
+			id = #id# 
+		</isNotEmpty>
+		 order by create_time desc
+    </select>
+    
+
+    <update id="updateCollectionClientInfo" parameterClass="queryClientCollection">
+    	update es_query_client_collection set state = #state# where id = #id#
+    </update>
+</sqlMap>

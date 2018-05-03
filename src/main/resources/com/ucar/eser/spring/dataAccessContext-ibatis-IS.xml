@@ -1,0 +1,77 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+	http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd"
+	default-autowire="byName" default-lazy-init="true">
+	<bean id="dataSourceCarMysql" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="url">
+			<value>${mysql.url}</value>
+		</property>
+		<property name="username">
+			<value>${mysql.username}</value>
+		</property>
+		<property name="password">
+			<value>${mysql.pass}</value>
+		</property>
+		<property name="driverClassName">
+			<value>${mysql.driver}</value>
+		</property>
+		<property name="maxActive" value="40" />
+		<property name="maxIdle" value="40" />
+		<property name="minIdle" value="20"/>
+		<property name="validationQuery" value="SELECT 1" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnBorrow" value="true" />
+		<property name="validationQueryTimeout" value="1000"/>
+	</bean>
+
+	<!--iBatis TransactionManager -->
+	<bean id="transactionManagerCarMysql" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSourceCarMysql" />
+	</bean>
+	<!--IBATIS -->
+	<bean id="sqlMapClientCarMysql" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:com/ucar/eser/spring/sqlMapConfig.xml</value>
+		</property>
+		<property name="mappingLocations">
+			<value>classpath*:com/ucar/eser/sql/**/*_sql.xml</value>
+		</property>
+		<property name="dataSource">
+			<ref bean="dataSourceCarMysql" />
+		</property>
+	</bean>
+
+
+	<bean id="baseDaoCarMysql" lazy-init="false"  class="com.ucar.eser.core.ibatis.EserIbatisDaoImpl">
+		<property name="dataSource">
+			<ref bean="dataSourceCarMysql" />
+		</property>
+		<property name="sqlMapClient">
+			<ref bean="sqlMapClientCarMysql" />
+		</property>
+	</bean>
+
+	<bean id="transactionServiceCarMysql" abstract="true" lazy-init="true"
+		class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+			<ref bean="transactionManagerCarMysql" />
+		</property>
+		<property name="proxyTargetClass" value="true" />
+		<property name="transactionAttributes">
+			<props>
+				<prop key="get*">PROPAGATION_REQUIRED,readOnly</prop>
+				<prop key="create*">PROPAGATION_REQUIRED</prop>
+				<prop key="update*">PROPAGATION_REQUIRED</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED</prop>
+				<prop key="save*">PROPAGATION_REQUIRED</prop>
+				<prop key="remove*">PROPAGATION_REQUIRED</prop>
+				<prop key="insert*">PROPAGATION_REQUIRED</prop>
+				<prop key="add*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+
+</beans>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.stat.NodeThreadPoolStatDao">
+
+    <typeAlias alias="nodeThreadPoolStatInfo" type="com.ucar.eser.core.bean.vo.stat.NodeThreadPoolStatInfo"></typeAlias>
+
+    <sql id="pool_info">
+        t.id AS id,
+        t.cluster_name AS clusterName,
+        t.host AS host,
+        t.thread_type AS threadType,
+        t.threads AS threads,
+        t.queue AS queue,
+        t.active AS active,
+        t.rejected AS rejected,
+        t.interval_rejected AS intervalRejected,
+        t.largest AS largest,
+        t.completed AS completed,
+        t.interval_completed AS intervalCompleted,
+        t.server_collect_time AS serverCollectTime,
+        t.create_time AS createTime
+    </sql>
+    
+    <!-- 根据时间，集群、结点ip， 线程池类型查询打点信息 -->
+    <select id="getList" parameterClass="nodeThreadPoolStatInfo" resultClass="nodeThreadPoolStatInfo">
+        SELECT <include refid="pool_info"/>
+        FROM `es_thread_pool_stat` t
+        where      t.cluster_name = #clusterName# 
+              AND  t.host = #host#
+              AND  t.thread_type = #threadType#
+              AND  t.server_collect_time between #startTime# and #endTime#
+    </select>
+    
+    <insert id="insertStat" parameterClass="nodeThreadPoolStatInfo">
+        INSERT INTO `es_thread_pool_stat`
+            (`cluster_name`,
+             `host`,
+             `thread_type`,
+             `threads`,
+             `queue`,
+             `active`,
+             `rejected`,
+             `interval_rejected`,
+             `largest`,
+             `completed`,
+             `interval_completed`,
+             `server_collect_time`,
+             `create_time`)
+		VALUES (#clusterName#,
+		        #host#,
+		        #threadType#,
+		        #threads#,
+		        #queue#,
+		        #active#,
+		        #rejected#,
+		        #intervalRejected#,
+		        #largest#,
+		        #completed#,
+		        #intervalCompleted#,
+		        #serverCollectTime#,
+		        #createTime#);
+    </insert>
+    
+    
+    <!-- 根据插入时间，集群、结点ip， 线程池类型查询打点信息 -->
+    <select id="getStatInfos" parameterClass="nodeThreadPoolStatInfo" resultClass="nodeThreadPoolStatInfo">
+        SELECT <include refid="pool_info"/>
+        FROM `es_thread_pool_stat` t
+        where  t.cluster_name = #clusterName# 
+          AND  t.host = #host#
+          AND  t.create_time = #createTime#
+    </select>
+    
+</sqlMap>

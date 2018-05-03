@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC 
+   "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+ "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.ucar.escloud.dao.stat.NodeOSStatDao">
+
+    <typeAlias alias="nodeOSStatInfo" type="com.ucar.eser.core.bean.vo.stat.NodeOSStatInfo"></typeAlias>
+
+    <sql id="stat_info">
+        t.id AS id,
+        t.cluster_name AS clusterName,
+        t.host AS host,
+		t.cpu_percent AS cpuPercent,
+		t.load_average AS loadAverage,
+		t.mem_total AS memTotal,
+		t.mem_used AS memUsed,
+		t.swap_total AS swapTotal,
+		t.swap_used AS swapUsed
+    </sql>
+    
+    <!-- 根据时间，集群、结点ip， 线程池类型查询打点信息 -->
+    <select id="getList" parameterClass="nodeOSStatInfo" resultClass="nodeOSStatInfo">
+        SELECT <include refid="stat_info"/>
+        FROM es_node_os_stat t
+        WHERE  t.cluster_name = #clusterName# 
+          AND  t.host = #host#
+          AND  t.collect_time between #startTime# and #endTime#
+    </select>
+    
+    <insert id="insertStat" parameterClass="nodeOSStatInfo">
+        INSERT INTO es_node_os_stat
+            (id,
+             cluster_name,
+             host,
+             cpu_percent,
+             load_average,
+             mem_total,
+             mem_used,
+             swap_total,
+             swap_used )
+		VALUES (#id#,
+		        #clusterName#,
+		        #host#,
+		        #cpuPercent#,
+		        #loadAverage#,
+		        #memTotal#,
+		        #memUsed#,
+		        #swapTotal#,
+		        #swapUsed#);
+    </insert>
+    
+</sqlMap>

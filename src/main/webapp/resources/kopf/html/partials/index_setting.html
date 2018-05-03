@@ -1,0 +1,58 @@
+<div class="content-panel">
+    <div class="col-md-12 content-panel">
+        <h4 class="panel-title">
+            <span >修改索引配置 <span style="margin-left:20px;font-size: 15px;color: #B73766;font-weight: bold;">&nbsp;{{index}}</span></span>
+        </h4>
+
+        <div id='jqxTabs' style="margin-top: 25px;">
+            <ul>
+                <li style="margin-left:30px;color: #d0d0d0;font-weight: bold;font-size: 13px">replicas</li>
+                <li style="margin-left:5px;color: #d0d0d0;font-weight: bold;font-size: 13px">refresh</li>
+                <li style="margin-left:5px;color: #d0d0d0;font-weight: bold;font-size: 13px">allocation</li>
+            </ul>
+
+            <div style="background-color: #222;color: #d0d0d0;">
+                <div class="row" style="margin-top: 30px;margin-left: 10px;margin-right: 10px">
+                    <div class="col-xs-2" style="padding-right: 0px">
+                        <label class="form-label" style="float: right;line-height: 30px;">number_of_replicas</label>
+                    </div>
+                    <div class="col-xs-3">
+                        <input type="text" ng-model="editable_settings['index.number_of_replicas']" class="form-control input-sm" placeholder="默认1">
+                    </div>
+                    <div class="col-xs-2" style="padding-right: 0px">
+                        <button type="button" class="btn btn-primary sm" ng-click='saveReplicas()' style="float: left">保存</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background-color: #222;color: #d0d0d0;">
+                <div class="row" style="margin-top: 30px;margin-left: 10px;margin-right: 10px">
+                    <div class="col-xs-2" style="padding-right: 0px">
+                        <label class="form-label" style="float: right;line-height: 30px;">refresh_interval</label>
+                    </div>
+                    <div class="col-xs-3">
+                        <input  id="1" type="text" ng-model="editable_settings['index.refresh_interval']" class="form-control input-sm" placeholder="默认5s">
+                    </div>
+                    <div class="col-xs-2" style="padding-right: 0px">
+                        <button type="button" class="btn btn-primary sm" ng-click='saverRefreshInterval()' style="float: left">保存</button>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background-color: #222;color: #d0d0d0;">
+                <div class="row" style="margin-top: 30px;margin-left: 10px;margin-right: 10px">
+                    <div class="col-xs-3" style="padding-right: 0px">
+                        <label class="form-label" style="float: right;line-height: 30px;">节点变化时,允许分片重分配</label>
+                    </div>
+                    <div class="col-xs-3">
+                        <div id="disable_allocationBtn" style='margin-left: 25px;margin-top: 3px'></div>
+                    </div>
+                    <div class="col-xs-2" style="padding-right: 0px">
+                        <button type="button" class="btn btn-primary sm" ng-click='saveAllocation()' style="float: left">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

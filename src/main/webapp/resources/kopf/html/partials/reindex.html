@@ -1,0 +1,66 @@
+<div class="content-panel">
+    <div id="mainSplitter">
+        <div class="splitter-panel content-panel">
+
+            <div class="panel-group" >
+                <div class="panel panel-default" style="height: 660px">
+
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            重建索引
+                        </h4>
+                    </div>
+                    <div>
+                        <div class="panel-body">
+                            <div style="max-width: 680px;min-width: 550px">
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <div id="re-index-combobox"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <select class="form-control input-sm" ng-model="field_type">
+                                                <option value="">选择类型</option>
+                                                <option ng-repeat="fTypes in field_types" value="{{ fTypes }}">{{ fTypes
+                                                    }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control input-sm" placeholder="输入新索引名称" ng-model="field_new_index">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 5px">
+                                    <span class="form-label" style="float: left;margin-left: 0px;font-size: 13px">自定义编辑</span>
+                                </div>
+                                <div>
+                                    　　　　<div style="float:left"></div>
+                                    　　　　<div style="float:left"></div>
+                                    　　　　<div style="clear:both"></div>
+                                    　　</div>
+                                <div id="index-settings-editor" class="kopf-ace-editor create-index-editor"></div>
+
+                                <div class="col-lg-12" style="margin-top: 15px">
+                                    <span class="pull-right">
+                                        <button type="button" class="btn btn-default sm" style="margin-right: 15px" ng-click='editor.format()'>格式化</button>
+                                        <button type="button" class="btn btn-primary sm" ng-click='promptUpdateIndex()'>提交</button>
+                                        <a id="submitA" data-toggle="modal" href="#confirm_dialog2"
+                                           class="btn btn-primary input-sm hide"
+                                           target="_self">提交</a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
