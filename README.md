@@ -21,8 +21,8 @@ EserKnife 是一个Es的运维管理工具，fork自kopf，但它不是es的插�
 ![](https://raw.githubusercontent.com/ucarGroup/EserKnife/master/img/alarm.png "")
 ## 安装
 1. 运行script中的脚本初始化数据库
-2. 修改数据库配置 src/main/filters/test.properties
+2. 修改数据库配置 src/main/filters/test.properties（对应环境修改）
 3. 构建war包，部署
-4. 访问  http://ip:port/eserknife/login.jsp   admin/1
+4. 访问  http://ip:port/eserknife/login.jsp   admin/51eser
 ## 协议
 MIT
