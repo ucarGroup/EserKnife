@@ -4,7 +4,6 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author forest
- * @email wei.wang09@ucarinc.com
  * @create 2017-05-26 13:50
  */
 public interface ExportOrDeleteDocService {

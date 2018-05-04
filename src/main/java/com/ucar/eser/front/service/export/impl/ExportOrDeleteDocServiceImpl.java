@@ -29,7 +29,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * @author forest
- * @email wei.wang09@ucarinc.com
  * @create 2017-05-26 11:01
  */
 

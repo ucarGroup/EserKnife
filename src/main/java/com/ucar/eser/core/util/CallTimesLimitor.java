@@ -2,7 +2,6 @@ package com.ucar.eser.core.util;
 
 /**
  * @author forest
- * @email wei.wang09@ucarinc.com
  * @create 2017-07-07 10:38
  */
 public class CallTimesLimitor {
