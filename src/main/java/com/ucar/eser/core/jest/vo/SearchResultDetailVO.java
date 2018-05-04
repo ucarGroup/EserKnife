@@ -7,7 +7,6 @@ import java.io.Serializable;
  * Description: 查询结果详细信息vo
  * All Rights Reserved.
  * Created on 2016-7-20 下午3:38:28
- * @author  孔增（kongzeng@zuche.com）
  */
 public class SearchResultDetailVO implements Serializable {
 

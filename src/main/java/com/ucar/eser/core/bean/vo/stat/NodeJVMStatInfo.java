@@ -10,7 +10,6 @@ import java.util.Date;
  * Description: 节点jvm信息统计vo
  * All Rights Reserved.
  * Created on 2016-11-14 上午11:18:35
- * @author  孔增（kongzeng@zuche.com）
  */
 
 public class NodeJVMStatInfo implements Serializable {

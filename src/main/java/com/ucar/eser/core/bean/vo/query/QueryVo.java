@@ -7,7 +7,6 @@ import java.util.List;
  * Description: 查询请求体
  * All Rights Reserved.
  * Created on 2016-10-20 下午6:52:10
- * @author  孔增（kongzeng@zuche.com）
  */
 public class QueryVo {
 	

@@ -16,7 +16,6 @@ public class RequestContextUtil {
 	 * 
 	 * Description:获取当前用户信息 
 	 * Created on 2016-9-20 下午1:31:54
-	 * @author  孔增（kongzeng@zuche.com）
 	 * @return
 	 */
 	public static CustomUser getCustomUser() {
@@ -36,7 +35,6 @@ public class RequestContextUtil {
 	 * 
 	 * Description: 获取当前用户所属权限
 	 * Created on 2016-9-20 下午1:32:39
-	 * @author  孔增（kongzeng@zuche.com）
 	 * @return
 	 */
 	public static String getProductLine() {
@@ -51,7 +49,6 @@ public class RequestContextUtil {
 	 * 
 	 * Description:获取当前用户名 
 	 * Created on 2016-9-20 下午1:31:54
-	 * @author  孔增（kongzeng@zuche.com）
 	 * @return
 	 */
 	public static String getCustomUserName() {
@@ -66,7 +63,6 @@ public class RequestContextUtil {
 	 * 
 	 * Description: 依赖数据库拼装CustomUser
 	 * Created on 2016-9-20 下午1:50:25
-	 * @author  孔增（kongzeng@zuche.com）
 	 * @param userName
 	 * @return
 	 */

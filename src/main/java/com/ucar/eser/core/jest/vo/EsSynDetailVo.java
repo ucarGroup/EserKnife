@@ -9,7 +9,6 @@ import java.io.Serializable;
  * Description: es向外同步vo
  * All Rights Reserved.
  * Created on 2016-8-15 上午11:12:58
- * @author  孔增（kongzeng@zuche.com）
  */
 public class EsSynDetailVo implements Serializable {
 

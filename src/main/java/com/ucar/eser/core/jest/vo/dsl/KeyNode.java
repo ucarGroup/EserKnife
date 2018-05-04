@@ -11,7 +11,6 @@ import java.util.List;
  * Description: 创建es关键字结点
  * All Rights Reserved.
  * Created on 2016-6-29 下午12:11:30
- * @author  孔增（kongzeng@zuche.com）
  */
 public class KeyNode extends Node {
     /**
@@ -29,9 +28,6 @@ public class KeyNode extends Node {
      *
      * Description: 添加子节点
      * Created on 2016-6-30 上午11:12:55
-     * @author  孔增（kongzeng@zuche.com）
-     * @param node
-     * @return
      */
     public KeyNode addNode(Node node) {
         Assert.notNull(node.getNodeName(),"在创建构造方法时，需要指定nodeName");
@@ -42,10 +38,6 @@ public class KeyNode extends Node {
      *
      * Description: 可指定自定义结点名称
      * Created on 2016-6-17 下午2:18:05
-     * @author  孔增（kongzeng@zuche.com）
-     * @param nodeName
-     * @param node
-     * @return
      */
     public  KeyNode addNode(String nodeName, Node node) {
         this.put(nodeName, node);

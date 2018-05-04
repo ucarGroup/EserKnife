@@ -18,7 +18,6 @@ import java.util.List;
  * Description: es集群对象
  * All Rights Reserved.
  * Created on 2016-7-27 下午1:50:26
- * @author  孔增（kongzeng@zuche.com）
  */
 public class EsClusterDetail {
 

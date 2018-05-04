@@ -41,7 +41,6 @@ public class EsVoEnum {
      * Description: es结点关键字枚举
      * All Rights Reserved.
      * Created on 2016-6-16 下午4:46:35
-     * @author  孔增（kongzeng@zuche.com）
      */
     public static enum DSLKeyEnum implements DSLEnum{
         QUERY("query"),
@@ -104,7 +103,6 @@ public class EsVoEnum {
      * Description: es域关键字枚举
      * All Rights Reserved.
      * Created on 2016-6-16 下午4:46:35
-     * @author  孔增（kongzeng@zuche.com）
      */
     public static enum DSLFieldKeyEnum implements DSLEnum{
         FROM("from"),
@@ -171,7 +169,6 @@ public class EsVoEnum {
      * Description: 返回结果解析器枚举
      * All Rights Reserved.
      * Created on 2016-7-20 下午2:44:53
-     * @author  孔增（kongzeng@zuche.com）
      */
     public static enum ParseEnum {
         DEFAULT(new DefaultParseHandler()),//默认解析器
@@ -202,7 +199,6 @@ public class EsVoEnum {
      * Description: 操作类型
      * All Rights Reserved.
      * Created on 2016-8-11 下午3:55:12
-     * @author  孔增（kongzeng@zuche.com）
      */
     public static enum OperateTypeEnum {
         CREATE,

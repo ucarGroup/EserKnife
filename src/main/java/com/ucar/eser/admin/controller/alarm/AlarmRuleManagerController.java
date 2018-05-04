@@ -24,7 +24,6 @@ import java.util.*;
  * Description: 报警规则控制器
  * All Rights Reserved.
  * Created on 2016-9-19 上午11:35:42
- * @author  孔增（kongzeng@zuche.com）
  */
 @Controller
 @RequestMapping("/alarm/rule/")

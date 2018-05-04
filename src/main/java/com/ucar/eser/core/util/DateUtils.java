@@ -562,7 +562,6 @@ public class DateUtils {
     /**
      *
      * Description: 比较日期
-     * @Version1.0 2012-11-26 上午11:39:05 by 李涛（litao02@zuche.com）创建
      * @param dateType   枚举类型 年，月，日
      * @param pattern
      * @param isRoundMode  计算零头的情况，根据实际确定月份是否要加1 还是要减1

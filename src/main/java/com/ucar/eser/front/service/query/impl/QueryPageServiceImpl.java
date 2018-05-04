@@ -68,7 +68,6 @@ public class QueryPageServiceImpl implements QueryPageService {
 	 * 
 	 * Description: 包装查询条件
 	 * Created on 2016-10-21 下午1:54:02
-	 * @author  孔增（kongzeng@zuche.com）
 	 * @param queryVo
 	 * @return
 	 */

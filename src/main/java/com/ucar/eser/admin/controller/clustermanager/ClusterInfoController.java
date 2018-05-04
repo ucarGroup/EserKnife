@@ -21,7 +21,6 @@ import java.util.Map;
  * Description: es集群管理控制器
  * All Rights Reserved.
  * Created on 2016-9-13 下午2:34:59
- * @author  孔增（kongzeng@zuche.com）
  */
 @Controller
 @RequestMapping("/clusterInfo/")

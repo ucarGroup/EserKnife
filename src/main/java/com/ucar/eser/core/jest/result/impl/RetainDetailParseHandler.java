@@ -14,7 +14,6 @@ import java.util.List;
  * Description: 带有详细信息的查询结果解析器
  * All Rights Reserved.
  * Created on 2016-7-22 下午6:19:16
- * @author  孔增（kongzeng@zuche.com）
  */
 public class RetainDetailParseHandler extends ParseHandler {
 

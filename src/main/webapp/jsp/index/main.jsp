@@ -53,8 +53,6 @@
                 <h4>联系我们：</h4>
             </div>
             <div id="contact" class="page-body">
-                <li>孙宇鹏(分机:3415, <a href="mailto:yp.sun01@zuche.com">yp.sun01@zuche.com</a>)</li>
-                <li>崔路哲(分机:8161, <a href="mailto:lz.cui@zuche.com">lz.cui@zuche.com</a>)</li>
             </div>
             <div style="margin-top: 30px">
                 <h4>相关文档: </h4>

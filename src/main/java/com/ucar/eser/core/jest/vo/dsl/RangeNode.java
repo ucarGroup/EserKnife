@@ -7,7 +7,6 @@ import com.ucar.eser.core.jest.common.EsVoEnum.*;
  * Description:创建范围查询结点
  * All Rights Reserved.
  * Created on 2016-6-29 下午12:10:33
- * @author  孔增（kongzeng@zuche.com）
  */
 public class RangeNode extends Node{
 

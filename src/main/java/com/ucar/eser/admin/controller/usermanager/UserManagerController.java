@@ -23,7 +23,6 @@ import java.util.Map;
  * Description: 用户管理控制器
  * All Rights Reserved.
  * Created on 2016-9-19 上午11:35:42
- * @author  孔增（kongzeng@zuche.com）
  */
 @Controller
 @RequestMapping("/user/manager/")

@@ -10,7 +10,6 @@ import java.util.List;
  * Description: 查询返回结果信息
  * All Rights Reserved.
  * Created on 2016-7-28 上午11:26:19
- * @author  孔增（kongzeng@zuche.com）
  */
 public class SearchResultVo implements Serializable {
     /**

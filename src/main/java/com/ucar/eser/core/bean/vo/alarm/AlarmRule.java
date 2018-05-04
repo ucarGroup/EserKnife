@@ -9,7 +9,6 @@ import java.util.Date;
  * 
  * Description: 报警规则 All Rights Reserved. Created on 2016-12-6 下午5:19:41
  * 
- * @author 孔增（kongzeng@zuche.com）
  */
 public class AlarmRule implements Serializable{
 

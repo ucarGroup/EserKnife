@@ -5,7 +5,6 @@ import java.io.Serializable;
 /**
  *  cluster 集群vo
  * <br/> Created on 2016-6-25 下午5:42:10
- * @author  李洪波(hb.li@zhuche.com)
  * @since 4.1
  */
 public class ClusterVo extends VoItf implements Serializable {

@@ -6,7 +6,6 @@ package com.ucar.eser.core.bean.vo.alarm;
  * 
  * Description: 用于报警方法之间参数传递 All Rights Reserved. Created on 2016-12-7 下午5:06:36
  * 
- * @author 孔增（kongzeng@zuche.com）
  */
 public class AlarmParameterVo {
 	/**

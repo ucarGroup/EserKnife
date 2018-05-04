@@ -100,7 +100,6 @@ public class BulkResultVo implements Serializable {
      *
      * Description: 校验是否有失败的操作
      * Created on 2017-1-3 下午9:45:47
-     * @author  孔增（kongzeng@zuche.com）
      */
     public void checkFailed() {
         if (jsonObject != null && jsonObject.containsKey(ParseHandler.ITEMS_NAME)) {

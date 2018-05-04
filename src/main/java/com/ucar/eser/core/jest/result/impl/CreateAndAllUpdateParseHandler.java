@@ -10,7 +10,6 @@ import com.ucar.eser.core.jest.vo.CrdResultDetailVo;
  * Description: 插入和全部更新返回结果解析器
  * All Rights Reserved.
  * Created on 2016-7-22 下午6:18:58
- * @author  孔增（kongzeng@zuche.com）
  */
 public class CreateAndAllUpdateParseHandler extends ParseHandler {
 

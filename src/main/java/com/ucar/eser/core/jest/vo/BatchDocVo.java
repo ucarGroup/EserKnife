@@ -37,7 +37,6 @@ public class BatchDocVo extends VoItf implements Serializable {
     }
 
     /* (non-Javadoc)
-     * @see com.zuche.framework.es.vo.VoItf#getUrl()
      */
     @Override
     public String getUrl() {

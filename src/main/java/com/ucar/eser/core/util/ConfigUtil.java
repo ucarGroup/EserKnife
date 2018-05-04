@@ -30,7 +30,6 @@ public enum ConfigUtil {
      *
      * Description: 当前环境名称
      * Created on 2016-11-17 下午4:28:46
-     * @author  孔增（kongzeng@zuche.com）
      * @return
      */
     public String envTypeName() {
@@ -50,7 +49,6 @@ public enum ConfigUtil {
      *
      * Description: 当前环境标识
      * Created on 2016-11-17 下午4:29:04
-     * @author  孔增（kongzeng@zuche.com）
      * @return
      */
     public Integer envType() {

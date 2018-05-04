@@ -9,7 +9,6 @@ import java.util.Date;
  * Description: 数据源映射实体类
  * All Rights Reserved.
  * Created on 2017-3-10 下午4:29:12
- * @author  孔增（kongzeng@zuche.com）
  */
 public class DataSourceMapping {
 	/**

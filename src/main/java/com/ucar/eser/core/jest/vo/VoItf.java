@@ -11,7 +11,6 @@ import java.io.UnsupportedEncodingException;
 /**
  *
  * <br/> Created on 2016-6-1 上午10:43:37
- * @author  李洪波(hb.li@zhuche.com)
  * @since 4.1
  */
 public abstract class VoItf {
@@ -112,10 +111,6 @@ public abstract class VoItf {
      *
      * Description: 将消息体转换为json串
      * Created on 2016-7-29 下午3:24:09
-     * @author  孔增（kongzeng@zuche.com）
-     * @param
-     * @param
-     * @return
      */
     public String toJsonString(Object content) {
         String json = null;

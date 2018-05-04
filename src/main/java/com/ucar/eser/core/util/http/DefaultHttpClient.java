@@ -20,7 +20,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 /**
  * HTTP通讯帮助类<br/> Created on 2013-9-9 上午10:36:06
  *
- * @author litao(litao02@zhuche.com)
  * @since 3.2
  */
 public final class DefaultHttpClient {
@@ -51,7 +50,6 @@ public final class DefaultHttpClient {
      * @param connectTimeout 客户端连接时间
      * @param readTimeout    服务端响应时间
      * @return 响应字符串
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      *
      *
@@ -68,7 +66,6 @@ public final class DefaultHttpClient {
      * @param connectTimeout 客户端连接时间
      * @param readTimeout    服务端响应时间
      * @return 响应字符串
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String doPost(String url, Map<String, String> params, String type,String charset, int connectTimeout, int readTimeout) {
@@ -102,7 +99,6 @@ public final class DefaultHttpClient {
      * @param connectTimeout 客户端连接时间
      * @param readTimeout    服务端响应时间
      * @return 响应字符串
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String doPost(String url, String ctype, byte[] content, int connectTimeout, int readTimeout) {
@@ -140,7 +136,6 @@ public final class DefaultHttpClient {
      * @param url    请求地址
      * @param params 请求参数
      * @return 响应字符串
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String doGet(String url, Map<String, String> params,int readTimeOut,int connectionTimeout) throws Exception{
@@ -160,7 +155,6 @@ public final class DefaultHttpClient {
      * @param params  请求参数
      * @param charset 字符集，如UTF-8, GBK, GB2312
      * @return 响应字符串
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String doGet(String url, Map<String, String> params, String charset,int readTimeOut,int connectionTimeout) throws Exception{
@@ -194,7 +188,6 @@ public final class DefaultHttpClient {
      * @param method 请求方法
      * @param ctype  请求类型
      * @return
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static HttpURLConnection getConnection(URL url, String method, String ctype,int readTimeOut,int connectionTimeout) throws IOException{
@@ -204,7 +197,6 @@ public final class DefaultHttpClient {
         conn.setDoInput(true);
         conn.setDoOutput(true);
         conn.setRequestProperty("Accept", "text/xml,text/javascript,text/html,text/plain");
-        conn.setRequestProperty("User-Agent", "remote-zuche-java");
         conn.setRequestProperty("Content-Type", ctype);
         conn.setRequestProperty("Accept-Language", "zh-CN");
         conn.setReadTimeout(readTimeOut);
@@ -246,7 +238,6 @@ public final class DefaultHttpClient {
      * @param params  请求参数
      * @param charset 字符集，如UTF-8, GBK, GB2312
      * @return 查询字符串
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String buildQuery(Map<String, String> params, String charset) throws IOException{
@@ -330,7 +321,6 @@ public final class DefaultHttpClient {
      *
      * @param value 参数值
      * @return 反编码后的参数值
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String decode(String value) {
@@ -342,7 +332,6 @@ public final class DefaultHttpClient {
      *
      * @param value 参数值
      * @return 编码后的参数值
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String encode(String value) {
@@ -355,7 +344,6 @@ public final class DefaultHttpClient {
      * @param value   参数值
      * @param charset 字符集
      * @return 反编码后的参数值
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String decode(String value, String charset) {
@@ -376,7 +364,6 @@ public final class DefaultHttpClient {
      * @param value   参数值
      * @param charset 字符集
      * @return 编码后的参数值
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static String encode(String value, String charset) {
@@ -408,7 +395,6 @@ public final class DefaultHttpClient {
      *
      * @param query query URL地址
      * @return 参数映射
-     * @author litao(litao02@zhuche.com)
      * @since 3.2
      */
     public static Map<String, String> splitUrlQuery(String query) {

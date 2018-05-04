@@ -12,7 +12,6 @@ import java.util.List;
  * Description: 默认查询解析器
  * All Rights Reserved.
  * Created on 2016-7-22 下午6:18:58
- * @author  孔增（kongzeng@zuche.com）
  */
 public class DefaultParseHandler extends ParseHandler {
 

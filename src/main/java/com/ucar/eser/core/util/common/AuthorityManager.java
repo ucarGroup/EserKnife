@@ -20,7 +20,6 @@ import java.util.Set;
  * Description: 权限控制
  * All Rights Reserved.
  * Created on 2016-12-12 上午10:46:10
- * @author  孔增（kongzeng@zuche.com）
  */
 public class AuthorityManager {
 	

@@ -7,7 +7,6 @@ import java.io.Serializable;
  * Description: 集群健康度信息
  * All Rights Reserved.
  * Created on 2016-10-19 下午6:42:11
- * @author  孔增（kongzeng@zuche.com）
  */
 public class ClusterHealthVo implements Serializable{
 

@@ -8,7 +8,6 @@ import java.util.Date;
  * Description: 报警信息vo
  * All Rights Reserved.
  * Created on 2016-12-7 下午3:41:56
- * @author  孔增（kongzeng@zuche.com）
  */
 public class AlarmInfo implements Serializable{
 

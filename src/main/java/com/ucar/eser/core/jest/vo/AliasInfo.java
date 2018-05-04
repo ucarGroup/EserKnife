@@ -5,7 +5,6 @@ package com.ucar.eser.core.jest.vo;
  * Description: 别名信息
  * All Rights Reserved.
  * Created on 2016-7-22 下午4:27:56
- * @author  孔增（kongzeng@zuche.com）
  */
 public class AliasInfo {
     /**

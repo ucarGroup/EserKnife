@@ -117,7 +117,6 @@ public class DateUtil {
      * 
      * Description: 计算两个时间之间相差的秒数
      * Created on 2016-10-10 下午2:22:40
-     * @author  孔增（kongzeng@zuche.com）
      * @param startTime
      * @param toTime
      * @return
@@ -133,7 +132,6 @@ public class DateUtil {
 	 * 
 	 * Description: 获取与指定时间指定单位的时间
 	 * Created on 2016-10-10 下午2:45:54
-	 * @author  孔增（kongzeng@zuche.com）
 	 * @param date
 	 * @param field
 	 * @param diff

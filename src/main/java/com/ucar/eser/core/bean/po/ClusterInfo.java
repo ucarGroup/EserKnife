@@ -8,7 +8,6 @@ import com.ucar.eser.core.util.EncryptUtil;
  * Description: 集群信息
  * All Rights Reserved.
  * Created on 2016-9-13 下午4:59:46
- * @author  孔增（kongzeng@zuche.com）
  */
 public class ClusterInfo {
 	

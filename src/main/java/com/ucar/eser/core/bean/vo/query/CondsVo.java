@@ -4,7 +4,6 @@ package com.ucar.eser.core.bean.vo.query;
  * Description: 查询条件
  * All Rights Reserved.
  * Created on 2016-10-20 下午6:52:35
- * @author  孔增（kongzeng@zuche.com）
  */
 public class CondsVo {
 	/**

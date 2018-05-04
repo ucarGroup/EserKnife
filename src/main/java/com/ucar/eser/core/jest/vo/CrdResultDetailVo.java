@@ -9,7 +9,6 @@ import java.io.Serializable;
  * Description: 增删改返回结果VO
  * All Rights Reserved.
  * Created on 2016-8-11 下午1:37:39
- * @author  孔增（kongzeng@zuche.com）
  */
 public class CrdResultDetailVo implements Serializable {
     //执行结果

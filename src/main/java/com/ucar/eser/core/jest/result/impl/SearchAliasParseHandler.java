@@ -14,7 +14,6 @@ import java.util.Map;
  * Description: 查询别名返回结果解析
  * All Rights Reserved.
  * Created on 2016-7-22 下午4:36:21
- * @author  孔增（kongzeng@zuche.com）
  */
 public class SearchAliasParseHandler extends ParseHandler {
 

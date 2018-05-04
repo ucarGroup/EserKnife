@@ -10,7 +10,6 @@ import java.util.Date;
  * Description: 结点线程池统计信息
  * All Rights Reserved.
  * Created on 2016-9-21 下午3:56:57
- * @author  孔增（kongzeng@zuche.com）
  */
 public class NodeThreadPoolStatInfo implements Serializable {
 	

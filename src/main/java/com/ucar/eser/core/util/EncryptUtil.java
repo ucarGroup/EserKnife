@@ -10,11 +10,10 @@ import java.io.UnsupportedEncodingException;
 /**
  * 常用加密算法
  * <br/>Created on 2012-11-6 上午11:51:56
- * @author 郑治明（zm.zheng@zhuche.com）
  * @since 1.0
  */
 public final class EncryptUtil {
-    private static final String PREFIX = "CAR-ZUCHE";
+    private static final String PREFIX = "CAR-ES";
     private static final char MD5_ENCODING_VALUE1 = 0x001f;
     private static final int MD5_ENCODING_VALUE2 = 0x0015;
     private static final char MD5_ENCODING_VALUE3 = 0xffe0;

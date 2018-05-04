@@ -8,7 +8,6 @@ import com.ucar.eser.core.util.exception.ElasticSearchException;
  * Description: 返回结果解析器
  * All Rights Reserved.
  * Created on 2016-7-20 下午2:31:25
- * @author  孔增（kongzeng@zuche.com）
  */
 public abstract class ParseHandler {
     public static final String HITS_NAME = "hits";
@@ -34,7 +33,6 @@ public abstract class ParseHandler {
      *
      * Description: 结果解析
      * Created on 2016-8-19 下午5:40:39
-     *   孔增（kongzeng@zuche.com）
      * @param json json
      */
     public Object parse(JSONObject json) {
@@ -49,7 +47,6 @@ public abstract class ParseHandler {
      *
      * Description: 解析不含error的返回结果
      * Created on 2016-8-19 下午5:39:40
-     *   孔增（kongzeng@zuche.com）
      * @param json json
      */
     public abstract Object parseData(JSONObject json);
@@ -69,7 +66,6 @@ public abstract class ParseHandler {
      *
      * Description: 异常处理
      * Created on 2016-6-13 下午1:40:11
-     *  孔增（kongzeng@zuche.com）
      * @param json  json
      */
     public Object checkError(JSONObject json) {

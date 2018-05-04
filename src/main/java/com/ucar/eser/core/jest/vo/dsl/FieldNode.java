@@ -7,7 +7,6 @@ import com.ucar.eser.core.jest.common.EsVoEnum;
  * Description:创建域结点
  * All Rights Reserved.
  * Created on 2016-6-29 下午12:11:04
- * @author  孔增（kongzeng@zuche.com）
  */
 public class FieldNode extends Node {
 

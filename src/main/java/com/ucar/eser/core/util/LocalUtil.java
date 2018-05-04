@@ -11,7 +11,6 @@ import java.util.Enumeration;
 /**
  *  本地资源工具类
  * <br/> Created on 2013-11-21 下午2:35:51
- * @author  李洪波(hb.li@zhuche.com)
  * @since 3.2
  */
 public final class LocalUtil {

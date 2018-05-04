@@ -21,7 +21,6 @@ public class SearchContext {
      *
      * Description:
      * Created on 2016-6-17 下午3:09:11
-     * @author  孔增（kongzeng@zuche.com）
      * @param orderDesc  格式：排序列:[asc|desc](:mode) ,(mode 为可选项 <P/>
      * 此选项主要是针对一列有多个值是的排序策略，主要有min, max, avg 或 sum) <P/>
      * 若如需要多列组合排序，则用逗号分隔<P/>
@@ -57,9 +56,6 @@ public class SearchContext {
      *
      * Description: 设置分页
      * Created on 2016-6-30 上午11:55:40
-     * @author  孔增（kongzeng@zuche.com）
-     * @param from
-     * @param size
      */
     public void setPage(int from ,int size) {
         root.addField(DSLFieldKeyEnum.FROM.getName(), from);
@@ -69,7 +65,6 @@ public class SearchContext {
      *
      * Description: 设置返回值，服务端将从每列自身存储中取,一般适用于返回列少的情况
      * Created on 2016-6-30 上午11:55:52
-     * @author  孔增（kongzeng@zuche.com）
      * @param fields
      */
     public void setNeedReturnFields(List<String> fields) {
@@ -84,7 +79,6 @@ public class SearchContext {
      *
      * Description: 设置返回值,服务端将从source源文件中取锁需要的列,一般适用于索引开启_source存储且返回列多的情况
      * Created on 2016-6-30 上午11:55:52
-     * @author  孔增（kongzeng@zuche.com）
      * @param fields
      */
     public void setNeedReturnFieldsFromSource(List<String> fields) {

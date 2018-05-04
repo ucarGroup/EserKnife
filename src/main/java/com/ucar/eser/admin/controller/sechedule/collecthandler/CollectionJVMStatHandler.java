@@ -23,7 +23,6 @@ import java.util.Map.Entry;
  * Description: 收集jvm信息执行器
  * All Rights Reserved.
  * Created on 2016-9-26 下午12:04:13
- * @author  孔增（kongzeng@zuche.com）
  */
 public class CollectionJVMStatHandler extends KeyCallable<Boolean> {
 

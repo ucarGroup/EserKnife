@@ -8,7 +8,6 @@ public class EsCloudVoEnum {
 	 * Description: 角色枚举
 	 * All Rights Reserved.
 	 * Created on 2016-9-18 上午11:25:46
-	 * @author  孔增（kongzeng@zuche.com）
 	 */
 	public static enum RoleEnum {
 		MONITOR,
@@ -21,16 +20,9 @@ public class EsCloudVoEnum {
 	 * Description: 产品线枚举
 	 * All Rights Reserved.
 	 * Created on 2016-9-19 上午11:52:56
-	 * @author  孔增（kongzeng@zuche.com）
 	 */
 	public static enum ProductLineEnum {
-		UCAR("ucar"),
-		UC("uc"),
-		FCAR("fcar"),
-		ZUCHE("zuche"),
-		LOG("log"),
-        LUCKY("lucky"),
-		YCC("ycc");
+		LOG("log");
 
 		private String name;
 		

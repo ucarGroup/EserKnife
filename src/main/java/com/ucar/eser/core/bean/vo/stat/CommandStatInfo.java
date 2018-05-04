@@ -8,7 +8,6 @@ import java.util.Date;
  * Description: 命令统计信息
  * All Rights Reserved.
  * Created on 2016-10-25 下午2:59:15
- * @author  孔增（kongzeng@zuche.com）
  */
 public class CommandStatInfo implements Serializable {
 	

@@ -19,7 +19,6 @@ public class AlarmConstant {
 	 * Description: 产品线枚举
 	 * All Rights Reserved.
 	 * Created on 2016-9-19 上午11:52:56
-	 * @author  孔增（kongzeng@zuche.com）
 	 */
 	public static enum AlarmLatitudeEnum {
 		JVM("jvm"),

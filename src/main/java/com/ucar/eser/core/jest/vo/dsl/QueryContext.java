@@ -7,7 +7,6 @@ import com.ucar.eser.core.jest.common.EsVoEnum.*;
  * Description: 查询上下文
  * All Rights Reserved.
  * Created on 2016-6-16 下午7:21:41
- * @author  孔增（kongzeng@zuche.com）
  */
 public class QueryContext extends SearchContext{
 

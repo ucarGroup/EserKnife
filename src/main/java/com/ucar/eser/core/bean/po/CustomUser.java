@@ -8,7 +8,6 @@ import com.ucar.eser.core.bean.User;
  * Description: user对象扩展
  * All Rights Reserved.
  * Created on 2016-9-20 上午11:51:42
- * @author  孔增（kongzeng@zuche.com）
  */
 public class CustomUser extends User {
 	

@@ -25,7 +25,6 @@ public class ClusterUtil {
 	 * 
 	 * Description: 将集群信息添加到es集群管理中
 	 * Created on 2016-9-18 下午1:31:32
-	 * @author  孔增（kongzeng@zuche.com）
 	 * @param clusterInfo
 	 */
 	public static void addClusterToMonitor(ClusterInfo clusterInfo) {

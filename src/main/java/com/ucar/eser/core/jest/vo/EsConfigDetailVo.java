@@ -5,7 +5,6 @@ package com.ucar.eser.core.jest.vo;
  * Description: es配置vo
  * All Rights Reserved.
  * Created on 2016-7-26 下午9:53:00
- * @author  孔增（kongzeng@zuche.com）
  */
 public class EsConfigDetailVo {
 
