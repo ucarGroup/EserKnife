@@ -50,7 +50,7 @@
 					<label class="col-sm-3 control-label no-padding-right" for="hosts" >集群IP</label>
 
 					<div class="col-sm-9">
-						<input type="text" id="hosts" name="hosts" placeholder="集群IP" class="col-xs-10 col-sm-8"/>
+						<input type="text" id="hosts" name="hosts" placeholder="举例: xxx,yyy" class="col-xs-10 col-sm-8"/>
 					</div>
 				</div>
 				<div class="form-group">

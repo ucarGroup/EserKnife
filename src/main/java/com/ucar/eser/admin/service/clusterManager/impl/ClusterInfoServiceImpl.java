@@ -77,10 +77,7 @@ public class ClusterInfoServiceImpl implements ClusterInfoService {
 		ClusterInfo clusterInfo = clusterInfoDao.getClusterInfoById(id);
 		clusterInfoDao.deleteClusterInfoById(id);
 		JestManager.loadCluster();
-		boolean result = this.removeClusterCollection(clusterInfo.getClusterName());
-	    if(!result) {
-		   throw new BusinessRuntimeException("启动自动任务失败");
-	    }
+		this.removeClusterCollection(clusterInfo.getClusterName());
 	}
 
 	@Override

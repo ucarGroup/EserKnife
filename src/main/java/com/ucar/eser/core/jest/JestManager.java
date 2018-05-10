@@ -47,6 +47,10 @@ public class JestManager {
 
     public static JestClient getJestClient(String clustName){
         EsClusterDetail esCluster = MC_MAP.get(clustName);
+        if(esCluster == null){//容错处理
+            loadCluster();
+            esCluster = MC_MAP.get(clustName);
+        }
         StringBuilder key = new StringBuilder().append(clustName);
         if(StringUtils.isNotBlank(esCluster.getUserName())) {
             CustomUser customUser = (CustomUser) RequestContext.getSessionAttribute(Constant.CUSTOM_USER_SESSION_NAME);

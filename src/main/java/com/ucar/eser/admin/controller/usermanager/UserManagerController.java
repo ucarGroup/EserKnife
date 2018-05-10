@@ -80,7 +80,7 @@ public class UserManagerController {
     		if (ConfigUtil.I.envType() == 3) { //生产环境
     			userInfo.setState(1);
 			} else {//非生产环境
-				userInfo.setState(1);
+				userInfo.setState(2);
 			}
 			userInfo.setUserPwd(EncryptUtil.md5EncodeHex(userInfo.getUserPwd()));
 			userInfoService.addUserInfo(userInfo);

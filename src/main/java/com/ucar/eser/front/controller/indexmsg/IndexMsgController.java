@@ -476,7 +476,10 @@ public class IndexMsgController {
         int versionFirst = 0;
         if(jestService == null) jestService = (JestService) SpringInit.getApplicationContext().getBean("jestServiceImpl");
         JestResult result = jestService.getNoteSomInfo(clusterName,2);
-        JSONObject json = JSONObject.parseObject(result.getJsonString());
+        JSONObject json = null;
+        if(result != null){
+            json = JSONObject.parseObject(result.getJsonString());
+        }
         if(json != null) {
             JSONObject nodes = (JSONObject) json.get("nodes");
             if (nodes != null) {
